@@ -20,6 +20,6 @@ public class Camiseta extends Prenda{
 
     @Override
     public double calcularPrecioNeto() {
-        return getPrecio()-(getPrecio()*RECARGA);
+        return getPrecio()+(getPrecio()*RECARGA);
     }
 }
