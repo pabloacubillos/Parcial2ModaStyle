@@ -20,7 +20,7 @@ public class Vestido extends Prenda{
     }
 
     @Override
-    public double aplicarRecarga() {
+    public double calcularPrecioNeto() {
         return getPrecio()-(getPrecio()*RECARGA);
     }
 }
