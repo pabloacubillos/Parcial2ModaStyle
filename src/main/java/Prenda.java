@@ -48,5 +48,5 @@ public abstract class Prenda {
         this.color = color;
     }
 
-    public abstract double aplicarRecargas();
+    public abstract double aplicarRecarga();
 }
