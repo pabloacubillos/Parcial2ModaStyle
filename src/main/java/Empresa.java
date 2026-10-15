@@ -30,4 +30,10 @@ public class Empresa {
     public void setListaSucursales(List<Sucursal> listaSucursales) {
         this.listaSucursales = listaSucursales;
     }
-}
+
+
+
+    }
+
+
+

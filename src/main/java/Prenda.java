@@ -68,4 +68,17 @@ public abstract class Prenda {
     }
 
     public abstract double calcularPrecioNeto();
+
+    //Verificar que el codigo de prenda no esté repetido
+    public boolean verificarCodigoPrenda(String codigo){
+        boolean esRepetido = false;
+        for(Prenda prenda: listaPrendas){
+            if(prenda.getCodigo().equalsIgnoreCase(codigo)){
+                esRepetido = true;
+                break;
+            }
+        }
+        return esRepetido;
+
+        }
 }
