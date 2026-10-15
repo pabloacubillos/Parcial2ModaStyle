@@ -9,6 +9,42 @@ public class Aplicacion {
         int opcion;
 
         do{
+            System.out.println("\n===== MENÚ MODASTYLE =====");
+
+            System.out.println("\n===== REGISTROS =====");
+            System.out.println("1. Registrar prenda");
+            System.out.println("2. Registrar cliente");
+            System.out.println("3. Registrar vendedor");
+            System.out.println("4. Registrar existencias en una sucursal");
+
+            System.out.println("\n===== VENTAS =====");
+            System.out.println("5. Registrar venta");
+            System.out.println("6. Consultar total de una venta");
+
+            System.out.println("\n===== CONSULTAS =====");
+            System.out.println("7. Consultar prendas disponibles de una sucursal");
+            System.out.println("8. Consultar prendas agotadas");
+            System.out.println("9. Consultar ventas de un vendedor");
+            System.out.println("10. Consultar compras de un cliente");
+
+            System.out.println("\n===== REPORTES =====");
+            System.out.println("11. Calcular ingresos de una sucursal");
+            System.out.println("12. Ver la referencia más vendida");
+
+            System.out.println("\n0. Salir");
+            System.out.print("Seleccione una opción: ");
+
+            opcion = sc.nextInt();
+            sc.nextLine();
+
+
+
+
+
+
+
+
+
 
 
 
