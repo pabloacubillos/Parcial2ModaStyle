@@ -38,20 +38,10 @@ public class Aplicacion {
             sc.nextLine();
 
 
-
-
-
-
-
-
-
-
-
-
-
             switch(opcion){
                 case 1:
                     //Registrar Prendas
+                    System.out.println("=====Registrar prenda=====");
 
                     break;
                 case 2:

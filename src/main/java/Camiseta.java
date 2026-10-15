@@ -9,7 +9,7 @@ public class Camiseta extends Prenda {
     }
 
     public double calcularPrecioNeto() {
-        return getPrecio()-(getPrecio()*RECARGA);
+        return getPrecio()+(getPrecio()*RECARGA);
     }
 }
 
