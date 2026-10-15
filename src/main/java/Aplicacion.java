@@ -15,8 +15,11 @@ public class Aplicacion {
 
             switch(opcion){
                 case 1:
+                    //Registrar Prendas
+
                     break;
                 case 2:
+
                     break;
                 case 3:
                     break;

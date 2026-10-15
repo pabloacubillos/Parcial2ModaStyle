@@ -1,7 +1,5 @@
 import java.util.Scanner;
 
-
-
 public class Calzado extends Prenda {
     private int talla;
     private final double RECARGA = 0.05;
