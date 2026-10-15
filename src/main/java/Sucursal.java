@@ -29,7 +29,7 @@ public class Sucursal {
 
     @Override
     public String toString() {
-        return "\nSucursal" +
+        return "\nSucursal = " +
                 "codigo: " + codigo +
                 ", nombre: " + nombre +
                 ", direccion: " + direccion +
