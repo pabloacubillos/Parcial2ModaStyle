@@ -1,6 +1,6 @@
 public class Camiseta extends Prenda{
     private TallaPrenda talla;
-    private double RECARGA = 0;
+    private final double RECARGA = 0;
 
     public Camiseta(String codigo, String mercado, String nombre, double precio, String color, TallaPrenda talla) {
         super(codigo, mercado, nombre, precio, color);
@@ -14,10 +14,12 @@ public class Camiseta extends Prenda{
         this.talla = talla;
     }
 
-
+    public double getRECARGA() {
+        return RECARGA;
+    }
 
     @Override
     public double aplicarRecarga() {
-        return getPrecio();
+        return getPrecio()-(getPrecio()*RECARGA);
     }
 }
