@@ -2,18 +2,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Prenda {
-    private String codigo;
-    private String mercado;
-    private String nombre;
-    private double precio;
-    private String color;
+    protected String codigo;
+    protected String marca;
+    protected String nombre;
+    protected double precio;
 
     //creacion lista
     private List<Prenda> listaPrendas;
 
     public Prenda(String codigo, String mercado, String nombre, double precio, String color) {
+    public Prenda(String codigo, String marca, String nombre, double precio) {
         this.codigo = codigo;
-        this.mercado = mercado;
+        this.marca = marca;
         this.nombre = nombre;
         this.precio = precio;
         this.color = color;
@@ -23,41 +23,17 @@ public abstract class Prenda {
 
     }
 
-    public String getCodigo() {
-        return codigo;
-    }
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
+    public String getCodigo() { return codigo; }
+    public void setCodigo(String codigo) { this.codigo = codigo; }
 
-    public String getMercado() {
-        return mercado;
-    }
-    public void setMercado(String mercado) {
-        this.mercado = mercado;
-    }
+    public String getMarca() { return marca; }
+    public void setMarca(String marca) { this.marca = marca; }
 
-    public String getNombre() {
-        return nombre;
-    }
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
 
-    public double getPrecio() {
-        return precio;
-    }
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
+    public double getPrecio() { return precio; }
+    public void setPrecio(double precio) { this.precio = precio; }
 
     public List<Prenda> getListaPrendas() {
         return listaPrendas;
