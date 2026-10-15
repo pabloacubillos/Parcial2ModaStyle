@@ -6,15 +6,18 @@ public class Sucursal {
     private String nombre;
     private String direccion;
     private String ciudad;
+    private Empresa empresa;
     private List<Inventario> listaInventarios;
     private List<Vendedor> listaVendedores;
     private List<Venta> listaVentas;
 
-    public Sucursal(String codigo, String nombre, String direccion, String ciudad) {
+    public Sucursal(String codigo, String nombre, String direccion, String ciudad, Empresa empresa) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.direccion = direccion;
         this.ciudad = ciudad;
+        this.empresa = empresa;
+
         listaInventarios = new ArrayList<>();
         listaVendedores = new ArrayList<>();
         listaVentas = new ArrayList<>();
@@ -31,6 +34,13 @@ public class Sucursal {
 
     public String getCiudad() {return ciudad;}
     public void setCiudad(String ciudad) {this.ciudad = ciudad;}
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
 
     public List<Inventario> getListaInventarios() {
         return listaInventarios;
