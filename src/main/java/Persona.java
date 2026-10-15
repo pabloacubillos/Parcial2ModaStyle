@@ -1,4 +1,5 @@
 public abstract class Persona {
+
     private String documento;
     private String nombre;
     private String correo;
