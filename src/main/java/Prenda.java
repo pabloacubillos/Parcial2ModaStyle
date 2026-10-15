@@ -10,13 +10,11 @@ public abstract class Prenda {
     //creacion lista
     private List<Prenda> listaPrendas;
 
-    public Prenda(String codigo, String mercado, String nombre, double precio, String color) {
     public Prenda(String codigo, String marca, String nombre, double precio) {
         this.codigo = codigo;
         this.marca = marca;
         this.nombre = nombre;
         this.precio = precio;
-        this.color = color;
 
         //inicializar lista
         listaPrendas = new ArrayList<>();

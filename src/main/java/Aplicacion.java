@@ -45,7 +45,54 @@ public class Aplicacion {
 
                     break;
                 case 2:
+                    //Registrar Cliente
+                    System.out.println("Ingresa el numero de documento del cliente");
+                    String documentoCliente = sc.nextLine();
 
+                    System.out.println("Ingresa el nombre del cliente");
+                    String nombre = sc.nextLine();
+
+                    System.out.println("Ingresa el correo electronico del cliente");
+                    String correo = sc.nextLine();
+
+                    System.out.println("Ingresa el numero de telefono del cliente");
+                    String telefono = sc.nextLine();
+
+                    System.out.println("Ingresa el codigo de afiliacion del cliente");
+                    String codigoAfiliacion = sc.nextLine();
+
+                    Categoria categoria = null;
+
+                    System.out.println("Elige el numero de la categoria a la que pertenece el cliente:" +
+                            "\n0. No tiene" +
+                            "\n1. Broce" +
+                            "\n2. Plata" +
+                            "\n3. Oro");
+                    int opcionCategoria = sc.nextInt();
+                    do {
+                        switch (opcionCategoria) {
+                            case 0:
+                                categoria = null;
+                                break;
+
+                            case 1:
+                                categoria = Categoria.BRONCE;
+                                break;
+
+                            case 2:
+                                categoria = Categoria.PLATA;
+                                break;
+
+                            case 3:
+                                categoria = Categoria.ORO;
+                                break;
+
+                            default:
+                                System.out.println("Esta opcion es INVALIDA, ingrese una opcion valida");
+                        }
+                    } while(0 > opcionCategoria || opcionCategoria > 4);
+
+                    Cliente nuevoCliente = new Cliente(documentoCliente, nombre, correo, telefono, codigoAfiliacion, categoria);
                     break;
                 case 3:
                     break;
