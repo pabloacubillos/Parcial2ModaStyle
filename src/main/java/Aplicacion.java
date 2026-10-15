@@ -45,7 +45,25 @@ public class Aplicacion {
 
                     break;
                 case 2:
+                    //Registrar Cliente
+                    System.out.println("Ingresa el numero de documento del cliente");
+                    String documentoCliente = sc.nextLine();
+                    String nombre = sc.nextLine();
+                    String correo = sc.nextLine();
+                    String telefono = sc.nextLine();
+                    String codigoAfiliacion = sc.nextLine();
 
+                    System.out.println("Elige el numero de la categoria a la que pertenece el cliente:" +
+                            "\n0. Ninguno" +
+                            "\n1. Broce" +
+                            "\n2. Plata" +
+                            "\n3. Oro");
+
+                    switch (opcion){
+                        case 0:
+                    }
+
+                    Cliente nuevoCliente = new Cliente(documentoCliente, nombre, correo, telefono, codigoAfiliacion)
                     break;
                 case 3:
                     break;
