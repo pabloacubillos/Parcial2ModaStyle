@@ -50,5 +50,5 @@ public abstract class Prenda {
         this.color = color;
     }
 
-    public abstract double aplicarRecarga();
+    public abstract double calcularPrecioNeto();
 }
