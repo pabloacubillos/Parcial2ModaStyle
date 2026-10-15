@@ -66,4 +66,12 @@ public class Vendedor extends Persona{
                 ", salario=" + salario +
                 '}';
     }
+
+    // Modificar Vendedor
+
+    // Eliminar Vendedor
+
+    //Metoodo para agregar venta
+
+    //Metodo para consultar ventas
 }
