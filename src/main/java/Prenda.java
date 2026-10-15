@@ -3,13 +3,14 @@ public abstract class Prenda {
     private String mercado;
     private String nombre;
     private double precio;
-
+    private String color;
 
     public Prenda(String codigo, String mercado, String nombre, double precio, String color) {
         this.codigo = codigo;
         this.mercado = mercado;
         this.nombre = nombre;
         this.precio = precio;
+        this.color = color;
 
     }
 
@@ -39,6 +40,14 @@ public abstract class Prenda {
     }
     public void setPrecio(double precio) {
         this.precio = precio;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 
     public abstract double aplicarRecarga();
