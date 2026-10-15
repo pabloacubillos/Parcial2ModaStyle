@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Prenda {
     private String codigo;
     private String mercado;
@@ -5,12 +8,18 @@ public abstract class Prenda {
     private double precio;
     private String color;
 
+    //creacion lista
+    private List<Prenda> listaPrendas;
+
     public Prenda(String codigo, String mercado, String nombre, double precio, String color) {
         this.codigo = codigo;
         this.mercado = mercado;
         this.nombre = nombre;
         this.precio = precio;
         this.color = color;
+
+        //inicializar lista
+        listaPrendas = new ArrayList<>();
 
     }
 
@@ -48,6 +57,14 @@ public abstract class Prenda {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public List<Prenda> getListaPrendas() {
+        return listaPrendas;
+    }
+
+    public void setListaPrendas(List<Prenda> listaPrendas) {
+        this.listaPrendas = listaPrendas;
     }
 
     public abstract double calcularPrecioNeto();
