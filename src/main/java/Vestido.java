@@ -1,18 +1,11 @@
 public class Vestido extends Prenda{
 
-    private TallaPrenda talla;
+
     private final double RECARGA = 0.1;
 
-    public Vestido(String codigo, String mercado, String nombre, double precio, String color, TallaPrenda talla) {
-        super(codigo, mercado, nombre, precio, color);
-        this.talla = talla;
-    }
+    public Vestido(String codigo, String mercado, String nombre, double precio) {
+        super(codigo, mercado, nombre, precio);
 
-    public TallaPrenda getTalla() {
-        return talla;
-    }
-    public void setTalla(TallaPrenda talla) {
-        this.talla = talla;
     }
 
     public double getRECARGA() {
