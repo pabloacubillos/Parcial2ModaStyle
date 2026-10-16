@@ -1,4 +1,6 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Venta {
     private String codigo;
@@ -6,6 +8,7 @@ public class Venta {
     private Cliente cliente;
     private Vendedor vendedor;
     private Sucursal sucursal;
+    private List<DetalleVenta> listaDetalles;
 
     public Venta(String codigo, LocalDate fecha, Cliente cliente, Vendedor vendedor, Sucursal sucursal) {
         this.codigo = codigo;
@@ -13,14 +16,17 @@ public class Venta {
         this.cliente = cliente;
         this.vendedor = vendedor;
         this.sucursal = sucursal;
+
+        listaDetalles = new ArrayList<>();
     }
 
-    public String getCodigo() {return codigo;}
+    public List<DetalleVenta> getListaDetalles() {return listaDetalles;}
+    public void setListaDetalles(List<DetalleVenta> listaDetalles) {this.listaDetalles = listaDetalles;}
 
+    public String getCodigo() {return codigo;}
     public void setCodigo(String codigo) {this.codigo = codigo;}
 
     public LocalDate getFecha() {return fecha;}
-
     public void setFecha(LocalDate fecha) {this.fecha = fecha;}
 
     public Cliente getCliente() {

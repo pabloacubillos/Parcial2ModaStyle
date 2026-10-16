@@ -58,6 +58,7 @@ public class Empresa {
         this.listaSucursales = listaSucursales;
     }
 
+
     public List<Prenda> getListaPrendas() {
         return listaPrendas;
     }
@@ -161,5 +162,31 @@ public class Empresa {
 //registrar sucursal
     public void agregarSucursal(Sucursal sucursal) {
         listaSucursales.add(sucursal);
+    }
+
+// Metodo para ver si la sucursal si existe
+    public boolean encontrarSucursal(String codigoSucursal) {
+        boolean encontrada = false;
+
+        for (Sucursal s : listaSucursales) {
+            if (s.getCodigo().equals(codigoSucursal)) {
+                encontrada = true;
+                break;
+            }
+        }
+
+        return encontrada;
+    }
+    public Sucursal obtenerSucursal(String codigoSucursal) {
+        Sucursal sucursalEncontrada = null;
+
+        for (Sucursal s : listaSucursales) {
+            if (s.getCodigo().equals(codigoSucursal)) {
+                sucursalEncontrada = s;
+                break;
+            }
+        }
+
+        return sucursalEncontrada;
     }
 }
