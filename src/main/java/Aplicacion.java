@@ -411,6 +411,7 @@ public class Aplicacion {
                 case 7:
                     break;
                 case 8:
+                    //Consultar las prendas agotadas
 
 
                     break;
