@@ -40,6 +40,8 @@ public abstract class Prenda {
         this.listaInventarios = listaInventarios;
     }
 
+
+
     public abstract double calcularPrecioNeto();
 
 

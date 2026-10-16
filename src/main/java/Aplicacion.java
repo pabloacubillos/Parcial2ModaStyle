@@ -338,7 +338,7 @@ public class Aplicacion {
                 }
 
 
-                case 5:
+                case 5: {
                     //Registrar venta
                     String codigoSucursalVenta = "";
                     int sucursalElegidaVenta;
@@ -381,11 +381,6 @@ public class Aplicacion {
                     String documentoComprador = sc.nextLine();
 
                     if (!empresa.verificarCliente(documentoComprador)) {
-
-                    }
-                    System.out.println("Ingresa el documento del cliente");
-                    String documentoClienteVenta = sc.nextLine();
-                    if (!empresa.verificarCliente(documentoClienteVenta)) {
                         System.out.println("El cliente no esta registrado. Para realizar la venta, primero registre al cliente");
                         break;
                     }
@@ -404,15 +399,20 @@ public class Aplicacion {
 
                     LocalDate fechaVenta = LocalDate.now();
 
+                    System.out.println("");
+
+                    DetalleVenta detalleVenta = new DetalleVenta()
+
                     Venta ventaActual = new Venta(codigoVenta, fechaVenta, comprador, vendedorVenta, sucursalVenta);
+                    ventaActual.registrarDetalleVenta();
 
                     comprador.registrarVenta(ventaActual);
                     vendedorVenta.registrarVenta(ventaActual);
                     sucursalVenta.registrarVenta(ventaActual);
 
 
-
                     break;
+                }
                 case 6:
                     // Consultar total de una venta
                     System.out.println("\n===== CONSULTAR TOTAL DE UNA VENTA =====");
