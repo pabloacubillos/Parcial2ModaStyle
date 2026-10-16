@@ -639,8 +639,13 @@ public class Aplicacion {
 
                     break;
                 }
+                case 11: {
+                    //Calcular Ingresos sucursal
+                    System.out.println("===== CALCULAR INGRESOS DE UNA SUCURSAL =====");
 
 
+                    break;
+                }
                 case 12:
                     break;
                 case 0:
