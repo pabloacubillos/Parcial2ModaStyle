@@ -503,10 +503,39 @@ public class Aplicacion {
                 }
 
 
-                case 8:
+                case 8: {
+                    //cconsultar prendas agotadas
+                    System.out.println("\n===== CONSULTAR PRENDAS AGOTADAS =====");
+                    System.out.println("1. Sucursal Centro (S01)");
+                    System.out.println("2. Sucursal Norte (S02)");
+                    System.out.print("Seleccione una sucursal: ");
 
+                    String opcionSucursalConsulta = sc.nextLine();
+                    String codigoSucursalConsulta;
 
+                    if (opcionSucursalConsulta.equals("1")) {
+                        codigoSucursalConsulta = "S01";
+                    } else if (opcionSucursalConsulta.equals("2")) {
+                        codigoSucursalConsulta = "S02";
+                    } else {
+                        System.out.println("Opcion de sucursal no valida.");
+                        break;
+                    }
+                    Sucursal sucursalConsulta =
+                            empresa.obtenerSucursal(codigoSucursalConsulta);
+
+                    if (sucursalConsulta != null) {
+                        for (Inventario i : sucursalConsulta.getListaInventarios()){
+                            if(i.getCantidadDisponible() == 0){
+                                String informacionPrenda = i.toString();
+                                System.out.println(informacionPrenda);
+                            }
+                        }
+                    } else {
+                        System.out.println("No existe una sucursal con ese codigo.");
+                    }
                     break;
+                }
                 case 9:
                     System.out.println("\n===== CONSULTAR VENTAS DE UN VENDEDOR POR SUCURSAL =====");
                     int opciones;
