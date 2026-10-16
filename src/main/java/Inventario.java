@@ -68,6 +68,8 @@ public class Inventario {
     }
 }
 
+
+
     // Base metodo para verificar talla
     /*     public void setTalla(int talla) {
         Scanner sc = new Scanner(System.in);

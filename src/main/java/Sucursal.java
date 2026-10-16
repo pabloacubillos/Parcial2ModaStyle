@@ -10,7 +10,6 @@ public class Sucursal {
     private List<Inventario> listaInventarios;
     private List<Vendedor> listaVendedores;
     private List<Venta> listaVentas;
-    private List<Cliente> listaClientes;
 
     public Sucursal(String codigo, String nombre, String direccion, String ciudad, Empresa empresa) {
         this.codigo = codigo;
@@ -25,37 +24,17 @@ public class Sucursal {
         listaClientes = new ArrayList<>();
     }
 
-    public String getCodigo() {
-        return codigo;
-    }
+    public String getCodigo() {return codigo;}
+    public void setCodigo(String codigo) {this.codigo = codigo;}
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
+    public String getNombre() {return nombre;}
+    public void setNombre(String nombre) {this.nombre = nombre;}
 
-    public String getNombre() {
-        return nombre;
-    }
+    public String getDireccion() {return direccion;}
+    public void setDireccion(String direccion) {this.direccion = direccion;}
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public String getCiudad() {
-        return ciudad;
-    }
-
-    public void setCiudad(String ciudad) {
-        this.ciudad = ciudad;
-    }
+    public String getCiudad() {return ciudad;}
+    public void setCiudad(String ciudad) {this.ciudad = ciudad;}
 
     public Empresa getEmpresa() {
         return empresa;
@@ -178,3 +157,28 @@ return registroExitoso;
     }
 
 }
+    public void mostrarPrendasDisponibles() {
+        boolean hayPrendas = false;
+
+        for (Inventario inventario : listaInventarios) {
+            if (inventario.getCantidadDisponible() > 0) {
+                System.out.println(
+                        "Prenda: " + inventario.getPrenda().getNombre()
+                                + " | Talla: " + inventario.getTalla()
+                                + " | Color: " + inventario.getColor()
+                                + " | Cantidad: " + inventario.getCantidadDisponible()
+                );
+
+                hayPrendas = true;
+            }
+        }
+
+        if (!hayPrendas) {
+            System.out.println("Esta sucursal no tiene prendas disponibles.");
+        }
+    }
+    }
+
+
+    // Metodo Agregar vendedor
+

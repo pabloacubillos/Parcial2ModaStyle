@@ -7,6 +7,10 @@ public class Empresa {
     private String direccionPrincipal;
 
     private List<Sucursal> listaSucursales;
+    private List<Cliente> listaClientes;
+    //creacion lista
+    private List<Prenda> listaPrendas;
+
 
     public Empresa(String nombre, String nit, String direccionPrincipal) {
         this.nombre = nombre;
@@ -14,6 +18,9 @@ public class Empresa {
         this.direccionPrincipal = direccionPrincipal;
 
         listaSucursales = new ArrayList<>();
+        listaClientes = new ArrayList<>();
+        //inicializar lista
+        listaPrendas = new ArrayList<>();
     }
 
     @Override
@@ -49,6 +56,111 @@ public class Empresa {
     }
     public void setListaSucursales(List<Sucursal> listaSucursales) {
         this.listaSucursales = listaSucursales;
+    }
+
+    public List<Prenda> getListaPrendas() {
+        return listaPrendas;
+    }
+
+    public void setListaPrendas(List<Prenda> listaPrendas) {
+        this.listaPrendas = listaPrendas;
+    }
+    //Verificar que el codigo de prenda no esté repetido
+    public boolean verificarCodigoPrenda(String codigo) {
+        boolean esRepetido = false;
+        for (Prenda prenda : listaPrendas) {
+            if (prenda.getCodigo().equalsIgnoreCase(codigo)) {
+                esRepetido = true;
+                break;
+            }
+        }
+        return esRepetido;
+    }
+
+    public List<Cliente> getListaClientes() {
+        return listaClientes;
+    }
+    public void setListaClientes(List<Cliente> listaClientes) {
+        this.listaClientes = listaClientes;
+    }
+
+    //Verificar Cliente
+
+    public boolean verificarCliente (String documentoCliente){
+        boolean existe = false;
+        for (Cliente cliente : listaClientes){
+            if (cliente.getDocumento().equalsIgnoreCase(documentoCliente)){
+                existe = true;
+                break;
+            }
+        }
+        return existe;
+    }
+
+    //Registrar Cliente
+
+    public boolean registrarCliente (Cliente clienteNuevo){
+        boolean registroExitoso = false;
+        boolean estaRegistrado = verificarCliente(clienteNuevo.getDocumento());
+        if (!estaRegistrado){
+            listaClientes.add(clienteNuevo);
+            registroExitoso = true;
+        } else {
+            System.out.println("El cliente ya existe dentro de la base de la base de datos, no es posible registrarlo por segunda vez");
+        }
+        return registroExitoso;
+    }
+
+    //Mostrar Clientes
+
+    public void mostrarClientes(){
+        for(Cliente cliente : listaClientes){
+            System.out.println("\n\n" + cliente.toString());
+        }
+    }
+
+    //Buscar Clientes
+    public Cliente buscarCliente (String documento){
+        Cliente clienteBuscado = null;
+        for (Cliente cliente : listaClientes){
+            if (cliente.getDocumento().equalsIgnoreCase(documento)){
+                clienteBuscado = cliente;
+            }
+        }
+        if (clienteBuscado.getDocumento().equalsIgnoreCase(documento)){
+            return clienteBuscado;
+        } else {
+            System.out.println("ERROR. CLIENTE NO ENCONTRADO");
+            System.exit(0);
+            return clienteBuscado;
+        }
+    }
+
+    //Actualizar cliente
+    public void actualizarCliente (Cliente clienteActualizado){
+        for(Cliente cliente : listaClientes){
+            if(cliente.getDocumento().equalsIgnoreCase(clienteActualizado.getDocumento())){
+                cliente = clienteActualizado;
+            }
+        }
+    }
+
+    //Agregar prenda a la lista
+    public void agregarPrenda(Prenda prenda) {
+        listaPrendas.add(prenda);
+    }
+
+    public Sucursal buscarSucursal(String codigo) {
+        for (Sucursal sucursal : listaSucursales) {
+            if (sucursal.getCodigo().equalsIgnoreCase(codigo)) {
+                return sucursal;
+            }
+        }
+        return null;
+    }
+//registrar sucursal
+    public void agregarSucursal(Sucursal sucursal) {
+        listaSucursales.add(sucursal);
     }
 
 // Metodo para ver si la sucursal si existe

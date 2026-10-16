@@ -4,6 +4,21 @@ import java.util.Scanner;
 
 public class Aplicacion {
     public static void main (String[] args){
+        //Creacion objeto empresa
+        Empresa empresa = new Empresa("ModaStyle", "901234567-8","Armenia, Quindío" );
+        //Creación objeto(2) sucursal
+
+        Sucursal sucursal1 = new Sucursal("S01", "Sucursal Centro", "Carrera 14", "Armenia", empresa);
+
+        Sucursal sucursal2 = new Sucursal("S02", "Sucursal Norte", "Avenida Bolivar", "Armenia", empresa);
+
+        //Agregar sucursales a empresa
+        empresa.agregarSucursal(sucursal1);
+        empresa.agregarSucursal(sucursal2);
+
+
+
+
 
 
         //Menú interactivo
@@ -45,27 +60,100 @@ public class Aplicacion {
                     //Registrar Prendas
                     System.out.println("=====Registrar prenda=====");
 
+                    System.out.print("Ingrese el codigo de la prenda: ");
+                    String codigo = sc.nextLine();
+
+                    if (empresa.verificarCodigoPrenda(codigo)) {
+                        System.out.println("Error: ese codigo ya existe.");
+                        break;
+                    }
+
+                    System.out.print("Ingrese la marca: ");
+                    String marca = sc.nextLine();
+
+                    System.out.print("Ingrese el nombre: ");
+                    String nombre = sc.nextLine();
+
+                    System.out.print("Ingrese el precio: ");
+                    double precio = sc.nextDouble();
+                    sc.nextLine();
+
+                    System.out.println("Seleccione el tipo de prenda:");
+                    System.out.println("1. Camiseta");
+                    System.out.println("2. Pantalón");
+                    System.out.println("3. Vestido");
+                    System.out.println("4. Chaqueta");
+                    System.out.println("5. Calzado");
+
+                    System.out.print("Opcion: ");
+                    int tipo = sc.nextInt();
+                    sc.nextLine();
+
+                    Prenda prenda = null;
+
+                    switch (tipo) {
+                        case 1:
+                            prenda = new Camiseta(codigo, marca, nombre, precio);
+                            break;
+
+                        case 2:
+                            prenda = new Pantalon(codigo, marca, nombre, precio);
+                            break;
+
+                        case 3:
+                            prenda = new Vestido(codigo, marca, nombre, precio);
+                            break;
+
+                        case 4:
+                            prenda = new Chaqueta(codigo, marca, nombre, precio);
+                            break;
+
+                        case 5:
+                            prenda = new Calzado(codigo, marca, nombre, precio);
+                            break;
+
+                        default:
+                            System.out.println("Tipo de prenda no valido.");
+                            break;
+                    }
+                    if (prenda != null) {
+                        empresa.agregarPrenda(prenda);
+                        System.out.println("Prenda registrada correctamente.");
+                    }
+
+
+
+
+
+
+
                     break;
                 case 2:
                     //Registrar Cliente
                     System.out.println("Ingresa el numero de documento del cliente");
                     String documentoCliente = sc.nextLine();
 
+                    boolean documentoValido = empresa.verificarCliente(documentoCliente);
+                    if(documentoValido){
+                        System.out.println("Este documento es de un cliente ya registrado");
+                        break;
+                    }
+
                     System.out.println("Ingresa el nombre del cliente");
-                    String nombre = sc.nextLine();
+                    String nombreCliente = sc.nextLine();
 
                     System.out.println("Ingresa el correo electronico del cliente");
-                    String correo = sc.nextLine();
+                    String correoCliente = sc.nextLine();
 
                     System.out.println("Ingresa el numero de telefono del cliente");
-                    String telefono = sc.nextLine();
+                    String telefonoCliente = sc.nextLine();
 
                     System.out.println("Ingresa el codigo de afiliacion del cliente");
-                    String codigoAfiliacion = sc.nextLine();
+                    String codigoAfiliacionCliente = sc.nextLine();
 
-                    Categoria categoria = null;
+                    Categoria categoriaCliente = null;
 
-                    System.out.println("Elige el numero de la categoria a la que pertenece el cliente:" +
+                    System.out.println("Ingresa el numero correspondiente la categoria a la que se desea registrar el cliente:" +
                             "\n0. No tiene" +
                             "\n1. Broce" +
                             "\n2. Plata" +
@@ -74,19 +162,19 @@ public class Aplicacion {
                     do {
                         switch (opcionCategoria) {
                             case 0:
-                                categoria = null;
+                                categoriaCliente = null;
                                 break;
 
                             case 1:
-                                categoria = Categoria.BRONCE;
+                                categoriaCliente = Categoria.BRONCE;
                                 break;
 
                             case 2:
-                                categoria = Categoria.PLATA;
+                                categoriaCliente = Categoria.PLATA;
                                 break;
 
                             case 3:
-                                categoria = Categoria.ORO;
+                                categoriaCliente = Categoria.ORO;
                                 break;
 
                             default:
@@ -94,7 +182,13 @@ public class Aplicacion {
                         }
                     } while (0 > opcionCategoria || opcionCategoria > 4);
 
-                    Cliente nuevoCliente = new Cliente(documentoCliente, nombre, correo, telefono, codigoAfiliacion, categoria);
+                    Cliente nuevoCliente = new Cliente(documentoCliente, nombreCliente, correoCliente, telefonoCliente, codigoAfiliacionCliente, categoriaCliente);
+                    boolean clienteRegistrado = empresa.registrarCliente(nuevoCliente);
+                    if (clienteRegistrado){
+                        System.out.println("El cliente se registro correctamente");
+                    } else {
+                        System.out.println("El cliente no pudo registrarse en el sistema");
+                    }
                     break;
                 case 3:
 
@@ -144,9 +238,40 @@ public class Aplicacion {
 
 
                     break;
+
                 case 4:
+                    System.out.println("===== CONSULTAR PRENDAS DISPONIBLES =====");
+
+                    System.out.println("Sucursales disponibles:");
+                    System.out.println("S01 - Sucursal Centro");
+                    System.out.println("S02 - Sucursal Norte");
+
+                    System.out.print("Ingrese el codigo de la sucursal: ");
+                    String codigoSucursal = sc.nextLine();
+
+                    Sucursal sucursalSeleccionada = empresa.buscarSucursal(codigoSucursal);
+
+                    if (sucursalSeleccionada != null) {
+                        sucursalSeleccionada.mostrarPrendasDisponibles();
+                    } else {
+                        System.out.println("No existe una sucursal con ese codigo.");
+                    }
                     break;
+
                 case 5:
+                    //Registrar venta
+
+                    System.out.println("Ingresa el documento del cliente");
+                    String documentoClienteVenta = sc.nextLine();
+
+                    if (!empresa.verificarCliente(documentoClienteVenta)){
+                        System.out.println("El cliente no esta registrado. Para realizar la venta, primero registre al cliente");
+                        break;
+                    }
+
+
+
+
                     break;
                 case 6:
                     break;
@@ -177,4 +302,6 @@ public class Aplicacion {
         sc.close();
 
     }
+
+
 }
