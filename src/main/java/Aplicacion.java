@@ -222,6 +222,19 @@ public class Aplicacion {
                 case 4:
                     break;
                 case 5:
+                    //Registrar venta
+
+                    System.out.println("Ingresa el documento del cliente");
+                    String documentoClienteVenta = sc.nextLine();
+
+                    if (!empresa.verificarCliente(documentoClienteVenta)){
+                        System.out.println("El cliente no esta registrado. Para realizar la venta, primero registre al cliente");
+                        break;
+                    }
+
+
+
+
                     break;
                 case 6:
                     break;
