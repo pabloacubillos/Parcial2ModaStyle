@@ -129,7 +129,7 @@ public class Aplicacion {
                     String documentoCliente = sc.nextLine();
 
                     boolean documentoValido = empresa.verificarCliente(documentoCliente);
-                    if (documentoValido) {
+                    if(documentoValido){
                         System.out.println("Este documento es de un cliente ya registrado");
                         break;
                     }
@@ -175,11 +175,11 @@ public class Aplicacion {
                             default:
                                 System.out.println("Esta opcion es INVALIDA, ingrese una opcion valida");
                         }
-                    } while (0 > opcionCategoria || opcionCategoria > 4);
+                    } while(0 > opcionCategoria || opcionCategoria > 4);
 
                     Cliente nuevoCliente = new Cliente(documentoCliente, nombreCliente, correoCliente, telefonoCliente, codigoAfiliacionCliente, categoriaCliente);
                     boolean clienteRegistrado = empresa.registrarCliente(nuevoCliente);
-                    if (clienteRegistrado) {
+                    if (clienteRegistrado){
                         System.out.println("El cliente se registro correctamente");
                     } else {
                         System.out.println("El cliente no pudo registrarse en el sistema");
@@ -409,6 +409,7 @@ public class Aplicacion {
                         break;
 
                     case 7:
+
                         break;
                     case 8:
                         break;
@@ -416,15 +417,19 @@ public class Aplicacion {
                         break;
                     case 10:
                         break;
-                    case 11:
-                        break;
                     case 12:
                         break;
                     case 0:
+                        // Salir
+                        System.out.println("Programa finalizado.....");
                         break;
                     default:
+                        // Error en rojo
+                        System.out.println( "\u001B[31m Opción no válida.\u001B[0m");
 
-                }
+
+
+            }
 
         }while (opcion != 0);
 

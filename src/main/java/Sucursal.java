@@ -24,37 +24,17 @@ public class Sucursal {
 
     }
 
-    public String getCodigo() {
-        return codigo;
-    }
+    public String getCodigo() {return codigo;}
+    public void setCodigo(String codigo) {this.codigo = codigo;}
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
+    public String getNombre() {return nombre;}
+    public void setNombre(String nombre) {this.nombre = nombre;}
 
-    public String getNombre() {
-        return nombre;
-    }
+    public String getDireccion() {return direccion;}
+    public void setDireccion(String direccion) {this.direccion = direccion;}
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public String getCiudad() {
-        return ciudad;
-    }
-
-    public void setCiudad(String ciudad) {
-        this.ciudad = ciudad;
-    }
+    public String getCiudad() {return ciudad;}
+    public void setCiudad(String ciudad) {this.ciudad = ciudad;}
 
     public Empresa getEmpresa() {
         return empresa;
@@ -87,6 +67,7 @@ public class Sucursal {
     public void setListaVentas(List<Venta> listaVentas) {
         this.listaVentas = listaVentas;
     }
+
 
 
     @Override
@@ -168,6 +149,10 @@ public class Sucursal {
             System.out.println("Esta sucursal no tiene prendas disponibles.");
         }
     }
+//metodo agregar inventario
+    public void agregarInventario(Inventario inventario) {
+        listaInventarios.add(inventario);
+    }
     public boolean verificarVenta (String codigoVenta){
         boolean existe = false;
         for (Venta venta : listaVentas){
@@ -177,7 +162,7 @@ public class Sucursal {
             }
         }
         return existe;
-    }
+}
     public boolean registrarVenta (Venta nuevaVenta){
         boolean registroExitoso = false;
         boolean estaRegistrada = verificarVenta(nuevaVenta.getCodigo());
