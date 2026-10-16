@@ -58,6 +58,7 @@ public class Empresa {
         this.listaSucursales = listaSucursales;
     }
 
+
     public List<Prenda> getListaPrendas() {
         return listaPrendas;
     }
