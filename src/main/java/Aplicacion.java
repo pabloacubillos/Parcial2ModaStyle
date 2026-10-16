@@ -278,14 +278,7 @@ public class Aplicacion {
 
                 case 5:
                     //Registrar venta
-                    System.out.println("Ingrese el codigo de la sucursal donde se realiza la venta:");
-                    String codigoSucursalVenta = sc.nextLine();
-
-                    if (!empresa.encontrarSucursal(codigoSucursalVenta)) {
-                        System.out.println("Esta sucursal no existe");
-                        break;
-                    }
-
+                    String codigoSucursalVenta = "";
                     int sucursalElegidaVenta;
 
                     do {
@@ -352,6 +345,9 @@ public class Aplicacion {
                     Venta ventaActual = new Venta(codigoVenta, fechaVenta, comprador, vendedorVenta, sucursalVenta);
 
                     comprador.registrarVenta(ventaActual);
+                    vendedorVenta.registrarVenta(ventaActual);
+                    sucursalVenta.registrarVenta(ventaActual);
+
 
 
                     break;

@@ -24,17 +24,37 @@ public class Sucursal {
 
     }
 
-    public String getCodigo() {return codigo;}
-    public void setCodigo(String codigo) {this.codigo = codigo;}
+    public String getCodigo() {
+        return codigo;
+    }
 
-    public String getNombre() {return nombre;}
-    public void setNombre(String nombre) {this.nombre = nombre;}
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
 
-    public String getDireccion() {return direccion;}
-    public void setDireccion(String direccion) {this.direccion = direccion;}
+    public String getNombre() {
+        return nombre;
+    }
 
-    public String getCiudad() {return ciudad;}
-    public void setCiudad(String ciudad) {this.ciudad = ciudad;}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
 
     public Empresa getEmpresa() {
         return empresa;
@@ -67,7 +87,6 @@ public class Sucursal {
     public void setListaVentas(List<Venta> listaVentas) {
         this.listaVentas = listaVentas;
     }
-
 
 
     @Override
@@ -149,7 +168,28 @@ public class Sucursal {
             System.out.println("Esta sucursal no tiene prendas disponibles.");
         }
     }
+    public boolean verificarVenta (String codigoVenta){
+        boolean existe = false;
+        for (Venta venta : listaVentas){
+            if (venta.getCodigo().equalsIgnoreCase(codigoVenta)){
+                existe = true;
+                break;
+            }
+        }
+        return existe;
     }
+    public boolean registrarVenta (Venta nuevaVenta){
+        boolean registroExitoso = false;
+        boolean estaRegistrada = verificarVenta(nuevaVenta.getCodigo());
+        if (!estaRegistrada){
+            listaVentas.add(nuevaVenta);
+            registroExitoso = true;
+        } else {
+            System.out.println("La venta ya existe dentro de la base de la base de datos, no es posible registrarla por segunda vez");
+        }
+        return registroExitoso;
+    }
+}
 
 
 
