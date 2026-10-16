@@ -2,10 +2,8 @@ public class DetalleVenta {
 
     // Unidades compradas
     private int cantidad;
-
     //Precio por unidad después del recargo y el descuento
     private double PrecioUnitarioFinal;
-
     //Precio unitario final multiplicado por la cantidad.
     private double subtotal;
 

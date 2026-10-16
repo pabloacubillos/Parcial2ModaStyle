@@ -129,7 +129,7 @@ public class Aplicacion {
                     String documentoCliente = sc.nextLine();
 
                     boolean documentoValido = empresa.verificarCliente(documentoCliente);
-                    if (documentoValido) {
+                    if(documentoValido){
                         System.out.println("Este documento es de un cliente ya registrado");
                         break;
                     }
@@ -175,11 +175,11 @@ public class Aplicacion {
                             default:
                                 System.out.println("Esta opcion es INVALIDA, ingrese una opcion valida");
                         }
-                    } while (0 > opcionCategoria || opcionCategoria > 4);
+                    } while(0 > opcionCategoria || opcionCategoria > 4);
 
                     Cliente nuevoCliente = new Cliente(documentoCliente, nombreCliente, correoCliente, telefonoCliente, codigoAfiliacionCliente, categoriaCliente);
                     boolean clienteRegistrado = empresa.registrarCliente(nuevoCliente);
-                    if (clienteRegistrado) {
+                    if (clienteRegistrado){
                         System.out.println("El cliente se registro correctamente");
                     } else {
                         System.out.println("El cliente no pudo registrarse en el sistema");
@@ -216,13 +216,45 @@ public class Aplicacion {
 
                     System.out.println("-Dia: ");
                     int dia = sc.nextInt();
-                    LocalDate fechaContratacin = LocalDate.of(anio, mes, dia);
+                    LocalDate fechaContratacion = LocalDate.of(anio, mes, dia);
                     sc.nextLine();
 
                     System.out.println("Ingrese el salario del vendedor: ");
                     double salario = sc.nextDouble();
+                    sc.nextLine();
 
+                    int opcionSucursal;
+                    String codigoSucursal = "";
 
+                    do {
+                        System.out.println("Ingrese el numero correspondiente de la sucursal a la que pertenecera el vendedor:");
+                        System.out.println("1. Sucursal codigo S01");
+                        System.out.println("2. Sucursal codigo S02");
+                        System.out.print("Seleccione una opción: ");
+
+                        opcionSucursal = sc.nextInt();
+                        sc.nextLine();
+
+                        switch (opcionSucursal) {
+                            case 1:
+                                codigoSucursal = "S01";
+                                break;
+
+                            case 2:
+                                codigoSucursal = "S02";
+                                break;
+                            default:
+                                System.out.println("Esta opcion es INVALIDA");
+
+                        }
+                    } while (opcionSucursal < 1 || opcionSucursal > 2);
+
+                    Vendedor nuevoVendedor = new Vendedor(documentoVendedor, nombreVendedor, correoVendedor,
+                            telefonoVendedor, codigoVendedor, fechaContratacion,
+                            salario,null);
+
+                    Sucursal sucursalElegida = empresa.obtenerSucursal(codigoSucursal);
+                    sucursalElegida.registrarVendedor(nuevoVendedor, codigoSucursal, empresa);
                     break;
 
                 case 4:
@@ -282,17 +314,83 @@ public class Aplicacion {
 
                     break;
                 case 6:
+                    // Consultar total de una venta
+                    System.out.println("\n===== CONSULTAR TOTAL DE UNA VENTA =====");
+
+                    int suc;
+                    String codigoSuc= "";
+
+                    do {
+                        System.out.println("Ingrese el el numero de la sucursal a la cual quiere consultar " +
+                                "la venta.");
+                        System.out.println("1. Sucursal codigo S01");
+                        System.out.println("2. Sucursal codigo S02");
+                        System.out.print("Seleccione una opción: ");
+
+                        suc = sc.nextInt();
+                        sc.nextLine();
+
+                        switch (suc) {
+                            case 1:
+                                codigoSuc= "S01";
+                                break;
+
+                            case 2:
+                                codigoSuc= "S02";
+                                break;
+                            default:
+                                System.out.println("Esta opcion es INVALIDA");
+
+                        }
+                    } while (suc < 1 || suc > 2);
+
+                    System.out.print("Ingrese el código de la venta que desea consultar: ");
+                    String codigoVentaBuscada = sc.nextLine();
+
+                    Sucursal sucursalVenta = empresa.obtenerSucursal(codigoSuc);
+
+                    Venta ventaEncontrada = null;
+
+                    for(Venta v : sucursalVenta.getListaVentas()){
+                        if(v.getCodigo().equals(codigoVentaBuscada)){
+                            ventaEncontrada = v;
+                            break;
+                        }
+                    }
+                    if(ventaEncontrada != null) {
+                        System.out.println("Venta encontrada" +
+                                "\nCodigo de venta: " + ventaEncontrada.getCodigo() +
+                                "\nFecha: " + ventaEncontrada.getFecha());
+
+                        double totalVenta = 0;
+                        for (DetalleVenta detalle : ventaEncontrada.getListaDetalles()) { // Asegúrate de tener esta lista en Venta
+                            totalVenta += detalle.getSubtotal();
+                        }
+                        System.out.println("El total a pagar de esta centa es:"+totalVenta);
+                    }else{
+                        System.out.println("No existe una venta con ese codigo.");
+                    }
                     break;
                 case 7:
                     break;
                 case 8:
-
                     break;
                 case 9:
+                    // Consultar ventas de un vendedor
+
+
+
                     break;
                 case 10:
                     break;
+
+                case 11:
+                    break;
+
                 case 12:
+                    // ver la referemcia de premda mas vendida
+
+
                     break;
                 case 0:
                     // Salir
