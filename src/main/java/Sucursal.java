@@ -149,6 +149,10 @@ public class Sucursal {
             System.out.println("Esta sucursal no tiene prendas disponibles.");
         }
     }
+//metodo agregar inventario
+    public void agregarInventario(Inventario inventario) {
+        listaInventarios.add(inventario);
+    }
     }
 
 
