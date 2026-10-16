@@ -1,13 +1,13 @@
 public class Inventario {
     private Prenda prenda;
     private Sucursal sucursal;
-    private String talla;
+    private TallaPrenda talla;
     private String color;
     private int cantidadDisponible;
     private Prenda prendaAsociada;
 
 
-    public Inventario(Prenda prenda, Sucursal sucursal, String talla, String color,
+    public Inventario(Prenda prenda, Sucursal sucursal, TallaPrenda talla, String color,
                       int cantidadDisponible) {
         this.prenda = prenda;
         this.sucursal = sucursal;
@@ -32,11 +32,11 @@ public class Inventario {
         this.sucursal = sucursal;
     }
 
-    public String getTalla() {
+    public TallaPrenda getTalla() {
         return talla;
     }
 
-    public void setTalla(String talla) {
+    public void setTalla(TallaPrenda talla) {
         this.talla = talla;
     }
 

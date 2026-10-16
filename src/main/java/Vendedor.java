@@ -60,6 +60,28 @@ public class Vendedor extends Persona {
         this.listaVentas = listaVentas;
     }
 
+    public boolean verificarVenta (String codigoVenta){
+        boolean existe = false;
+        for (Venta venta : listaVentas){
+            if (venta.getCodigo().equalsIgnoreCase(codigoVenta)){
+                existe = true;
+                break;
+            }
+        }
+        return existe;
+    }
+    public boolean registrarVenta (Venta nuevaVenta){
+        boolean registroExitoso = false;
+        boolean estaRegistrada = verificarVenta(nuevaVenta.getCodigo());
+        if (!estaRegistrada){
+            listaVentas.add(nuevaVenta);
+            registroExitoso = true;
+        } else {
+            System.out.println("La venta ya existe dentro de la base de la base de datos, no es posible registrarla por segunda vez");
+        }
+        return registroExitoso;
+    }
+
     @Override
     public String toString() {
         return "Vendedor{" + super.toString() +

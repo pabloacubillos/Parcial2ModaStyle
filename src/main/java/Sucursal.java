@@ -149,7 +149,32 @@ public class Sucursal {
             System.out.println("Esta sucursal no tiene prendas disponibles.");
         }
     }
+//metodo agregar inventario
+    public void agregarInventario(Inventario inventario) {
+        listaInventarios.add(inventario);
     }
+    public boolean verificarVenta (String codigoVenta){
+        boolean existe = false;
+        for (Venta venta : listaVentas){
+            if (venta.getCodigo().equalsIgnoreCase(codigoVenta)){
+                existe = true;
+                break;
+            }
+        }
+        return existe;
+}
+    public boolean registrarVenta (Venta nuevaVenta){
+        boolean registroExitoso = false;
+        boolean estaRegistrada = verificarVenta(nuevaVenta.getCodigo());
+        if (!estaRegistrada){
+            listaVentas.add(nuevaVenta);
+            registroExitoso = true;
+        } else {
+            System.out.println("La venta ya existe dentro de la base de la base de datos, no es posible registrarla por segunda vez");
+        }
+        return registroExitoso;
+    }
+}
 
 
 
