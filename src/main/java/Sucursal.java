@@ -112,7 +112,20 @@ public class Sucursal {
             System.out.println("Registro exitoso");
 
         }
-return registroExitoso;
+        return registroExitoso;
+    }
+
+    public Vendedor obtenerVendedor(String documentoVendedor) {
+        Vendedor vendedorEncontrado = null;
+
+        for (Vendedor v : listaVendedores) {
+            if (v.getDocumento().equals(documentoVendedor)) {
+                vendedorEncontrado = v;
+                break;
+            }
+        }
+
+        return vendedorEncontrado;
     }
 
 
