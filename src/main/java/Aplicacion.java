@@ -224,7 +224,7 @@ public class Aplicacion {
                     sc.nextLine();
 
                     int opcionSucursal;
-                    String codigoSucursal = "";
+                    String codigoSucursalVendedor = "";
 
                     do {
                         System.out.println("Ingrese el numero correspondiente de la sucursal a la que pertenecera el vendedor:");
@@ -237,11 +237,11 @@ public class Aplicacion {
 
                         switch (opcionSucursal) {
                             case 1:
-                                codigoSucursal = "S01";
+                                codigoSucursalVendedor = "S01";
                                 break;
 
                             case 2:
-                                codigoSucursal = "S02";
+                                codigoSucursalVendedor = "S02";
                                 break;
                             default:
                                 System.out.println("Esta opcion es INVALIDA");
@@ -253,8 +253,8 @@ public class Aplicacion {
                             telefonoVendedor, codigoVendedor, fechaContratacion,
                             salario,null);
 
-                    Sucursal sucursalElegida = empresa.obtenerSucursal(codigoSucursal);
-                    sucursalElegida.registrarVendedor(nuevoVendedor, codigoSucursal, empresa);
+                    Sucursal sucursalElegida = empresa.obtenerSucursal(codigoSucursalVendedor);
+                    sucursalElegida.registrarVendedor(nuevoVendedor, codigoSucursalVendedor, empresa);
                     break;
 
                 case 4:
@@ -265,9 +265,9 @@ public class Aplicacion {
                     System.out.println("S02 - Sucursal Norte");
 
                     System.out.print("Ingrese el codigo de la sucursal: ");
-                    String codigoSucursal = sc.nextLine();
+                    String codigoSucursalPrenda = sc.nextLine();
 
-                    Sucursal sucursalSeleccionada = empresa.buscarSucursal(codigoSucursal);
+                    Sucursal sucursalSeleccionada = empresa.buscarSucursal(codigoSucursalPrenda);
 
                     if (sucursalSeleccionada != null) {
                         sucursalSeleccionada.mostrarPrendasDisponibles();
@@ -280,6 +280,23 @@ public class Aplicacion {
                     //Registrar venta
                     System.out.println("Ingrese el codigo de la sucursal donde se realiza la venta:");
                     String codigoSucursalVenta = sc.nextLine();
+
+                    if (!empresa.encontrarSucursal(codigoSucursalVenta)){
+                        System.out.println("Esta sucursal no existe");
+                        break;
+                    }
+                    Sucursal sucursalVenta= empresa.obtenerSucursal(codigoSucursalVenta);
+
+
+                    System.out.println("Ingresa el documento del vendedor que realiza la venta:");
+                    String documentoVendedorVenta = sc.nextLine();
+
+                    if (!sucursalVenta.verificarVendedor(documentoVendedorVenta)){
+                        System.out.println("El vendedor no existe");
+                        break;
+                    }
+                    Vendedor vendedor = sucursalVenta.obtenerVendedor(documentoVendedorVenta);
+
 
 
                     System.out.println("Ingresa el documento del cliente que realiza la compra:");
@@ -307,7 +324,7 @@ public class Aplicacion {
 
 
 
-                    Venta ventaActual = new Venta();
+                    Venta ventaActual = new Venta(codigoVenta, fechaVenta, comprador, , sucursalVenta);
 
                     comprador.registrarVenta(null);
 
