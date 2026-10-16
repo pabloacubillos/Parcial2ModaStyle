@@ -641,9 +641,34 @@ public class Aplicacion {
                 }
                 case 11: {
                     //Calcular Ingresos sucursal
+
                     System.out.println("===== CALCULAR INGRESOS DE UNA SUCURSAL =====");
+                    System.out.println("1. Sucursal Centro (S01)");
+                    System.out.println("2. Sucursal Norte (S02)");
+                    System.out.print("Seleccione una sucursal: ");
 
+                    String opcionSucursalConsulta = sc.nextLine();
+                    String codigoSucursalConsulta;
 
+                    if (opcionSucursalConsulta.equals("1")) {
+                        codigoSucursalConsulta = "S01";
+                    } else if (opcionSucursalConsulta.equals("2")) {
+                        codigoSucursalConsulta = "S02";
+                    } else {
+                        System.out.println("Opcion de sucursal no valida.");
+                        break;
+                    }
+                    Sucursal sucursalConsulta = empresa.obtenerSucursal(codigoSucursalConsulta);
+
+                    double ingresoTotal = 0;
+                    if (sucursalConsulta != null) {
+                        for (Inventario i : sucursalConsulta.getListaInventarios()){
+                            ingresoTotal += i.getPrenda().getPrecio();
+                        }
+                        System.out.println("El ingreso total de la sucursal es: $" + ingresoTotal);
+                    } else {
+                        System.out.println("No existe una sucursal con ese codigo.");
+                    }
                     break;
                 }
                 case 12:
