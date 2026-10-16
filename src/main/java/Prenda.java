@@ -7,8 +7,7 @@ public abstract class Prenda {
     protected String nombre;
     protected double precio;
 
-    //creacion lista
-    private List<Prenda> listaPrendas;
+
 
     public Prenda(String codigo, String marca, String nombre, double precio) {
         this.codigo = codigo;
@@ -16,8 +15,7 @@ public abstract class Prenda {
         this.nombre = nombre;
         this.precio = precio;
 
-        //inicializar lista
-        listaPrendas = new ArrayList<>();
+
 
     }
 
@@ -33,13 +31,11 @@ public abstract class Prenda {
     public double getPrecio() { return precio; }
     public void setPrecio(double precio) { this.precio = precio; }
 
-    public List<Prenda> getListaPrendas() {
-        return listaPrendas;
-    }
 
-    public void setListaPrendas(List<Prenda> listaPrendas) {
-        this.listaPrendas = listaPrendas;
-    }
 
     public abstract double calcularPrecioNeto();
-}
+
+
+
+        }
+

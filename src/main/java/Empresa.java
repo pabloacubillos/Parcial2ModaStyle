@@ -8,6 +8,9 @@ public class Empresa {
 
     private List<Sucursal> listaSucursales;
     private List<Cliente> listaClientes;
+    //creacion lista
+    private List<Prenda> listaPrendas;
+
 
     public Empresa(String nombre, String nit, String direccionPrincipal) {
         this.nombre = nombre;
@@ -16,6 +19,8 @@ public class Empresa {
 
         listaSucursales = new ArrayList<>();
         listaClientes = new ArrayList<>();
+        //inicializar lista
+        listaPrendas = new ArrayList<>();
     }
 
     @Override
@@ -52,6 +57,34 @@ public class Empresa {
     public void setListaSucursales(List<Sucursal> listaSucursales) {
         this.listaSucursales = listaSucursales;
     }
+
+    public List<Prenda> getListaPrendas() {
+        return listaPrendas;
+    }
+
+    public void setListaPrendas(List<Prenda> listaPrendas) {
+        this.listaPrendas = listaPrendas;
+    }
+    //Verificar que el codigo de prenda no esté repetido
+    public boolean verificarCodigoPrenda(String codigo) {
+        boolean esRepetido = false;
+        for (Prenda prenda : listaPrendas) {
+            if (prenda.getCodigo().equalsIgnoreCase(codigo)) {
+                esRepetido = true;
+                break;
+            }
+        }
+        return esRepetido;
+    }
+
+
+
+
+
+    }
+
+
+
 
     public List<Cliente> getListaClientes() {
         return listaClientes;
