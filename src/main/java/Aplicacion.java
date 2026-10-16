@@ -676,6 +676,7 @@ public class Aplicacion {
                 case 12:
                     System.out.println("\n===== REPORTE: PRENDA MÁS VENDIDA =====");
 
+
                     java.util.ArrayList<String> listaReferencias = new java.util.ArrayList<>();
                     java.util.ArrayList<Integer> listaCantidades = new java.util.ArrayList<>();
 
@@ -685,24 +686,29 @@ public class Aplicacion {
 
                         for (Venta venta : sucursal.getListaVentas()) {
 
+
                             if (venta.getListaDetalles() != null) {
                                 for (DetalleVenta detalle : venta.getListaDetalles()) {
 
 
-                                    String referencia = detalle.getPrenda().getReferencia();
-                                    int cantidadComprada = detalle.getCantidad();
+                                    Inventario inv = detalle.getInventario();
+
+                                    if (inv != null && inv.getPrenda() != null) {
+                                        String referencia = inv.getPrenda().getCodigo();
+                                        int cantidadComprada = detalle.getCantidad();
 
 
-                                    int indice = listaReferencias.indexOf(referencia);
+                                        int indice = listaReferencias.indexOf(referencia);
 
-                                    if (indice != -1) {
+                                        if (indice != -1) {
 
-                                        int cantidadActual = listaCantidades.get(indice);
-                                        listaCantidades.set(indice, cantidadActual + cantidadComprada);
-                                    } else {
+                                            int cantidadActual = listaCantidades.get(indice);
+                                            listaCantidades.set(indice, cantidadActual + cantidadComprada);
+                                        } else {
 
-                                        listaReferencias.add(referencia);
-                                        listaCantidades.add(cantidadComprada);
+                                            listaReferencias.add(referencia);
+                                            listaCantidades.add(cantidadComprada);
+                                        }
                                     }
                                 }
                             }
@@ -721,11 +727,11 @@ public class Aplicacion {
                             }
                         }
 
-                        // Obtenemos la referencia que quedó en esa misma posición ganadora
+
                         String referenciaMasVendida = listaReferencias.get(indiceMayor);
 
-                        System.out.println("La prenda mas vendia es: ");
-                        System.out.println("• Referencia: " + referenciaMasVendida);
+                        System.out.println("La prenda más vendida es!");
+                        System.out.println("• Referencia / Código: " + referenciaMasVendida);
                         System.out.println("• Unidades totales vendidas: " + mayorCantidad);
 
                     } else {

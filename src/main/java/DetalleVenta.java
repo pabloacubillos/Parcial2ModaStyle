@@ -42,7 +42,7 @@ public class DetalleVenta {
     public String toString() {
         return "DetalleVenta = " +
                 "cantidad:" + cantidad +
-                ", PrecioUnitarioFinal: " + PrecioUnitarioFinal +
+                ", PrecioUnitarioFinal: " + precioUnitarioFinal +
                 ", subtotal: " + subtotal + ". ";
     }
 }
