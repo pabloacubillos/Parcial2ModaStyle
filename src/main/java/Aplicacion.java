@@ -104,7 +104,7 @@ public class Aplicacion {
                     }
                     if (prenda != null) {
                         empresa.agregarPrenda(prenda);
-                        System.out.println("Prenda registrada exitosamente.");
+                        System.out.println("Prenda registrada correctamente.");
                     }
 
 
