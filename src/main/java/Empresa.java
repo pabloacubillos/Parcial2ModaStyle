@@ -7,6 +7,7 @@ public class Empresa {
     private String direccionPrincipal;
 
     private List<Sucursal> listaSucursales;
+    private List<Cliente> listaClientes;
 
     public Empresa(String nombre, String nit, String direccionPrincipal) {
         this.nombre = nombre;
@@ -14,6 +15,7 @@ public class Empresa {
         this.direccionPrincipal = direccionPrincipal;
 
         listaSucursales = new ArrayList<>();
+        listaClientes = new ArrayList<>();
     }
 
     @Override
@@ -49,5 +51,47 @@ public class Empresa {
     }
     public void setListaSucursales(List<Sucursal> listaSucursales) {
         this.listaSucursales = listaSucursales;
+    }
+
+    public List<Cliente> getListaClientes() {
+        return listaClientes;
+    }
+    public void setListaClientes(List<Cliente> listaClientes) {
+        this.listaClientes = listaClientes;
+    }
+
+    //Verificar Cliente
+
+    public boolean verificarCliente (String documentoCliente){
+        boolean existe = false;
+        for (Cliente cliente : listaClientes){
+            if (cliente.getDocumento().equalsIgnoreCase(documentoCliente)){
+                existe = true;
+                break;
+            }
+        }
+        return existe;
+    }
+
+    //Registrar Cliente
+
+    public boolean registrarCliente (Cliente clienteNuevo){
+        boolean registroExitoso = false;
+        boolean estaRegistrado = verificarCliente(clienteNuevo.getDocumento());
+        if (!estaRegistrado){
+            listaClientes.add(clienteNuevo);
+            registroExitoso = true;
+        } else {
+            System.out.println("El cliente ya existe dentro de la base de la base de datos, no es posible registrarlo por segunda vez");
+        }
+        return registroExitoso;
+    }
+
+    //Mostrar Clientes
+
+    public void mostrarClientes(){
+        for(Cliente cliente : listaClientes){
+            System.out.println("\n\n" + cliente.toString());
+        }
     }
 }

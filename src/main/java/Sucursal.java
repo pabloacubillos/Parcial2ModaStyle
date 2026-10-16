@@ -10,7 +10,6 @@ public class Sucursal {
     private List<Inventario> listaInventarios;
     private List<Vendedor> listaVendedores;
     private List<Venta> listaVentas;
-    private List<Cliente> listaClientes;
 
     public Sucursal(String codigo, String nombre, String direccion, String ciudad, Empresa empresa) {
         this.codigo = codigo;
@@ -22,7 +21,6 @@ public class Sucursal {
         listaInventarios = new ArrayList<>();
         listaVendedores = new ArrayList<>();
         listaVentas = new ArrayList<>();
-        listaClientes = new ArrayList<>();
     }
 
     public String getCodigo() {return codigo;}
@@ -63,48 +61,6 @@ public class Sucursal {
     }
     public void setListaVentas(List<Venta> listaVentas) {
         this.listaVentas = listaVentas;
-    }
-
-    public List<Cliente> getListaClientes() {
-        return listaClientes;
-    }
-    public void setListaClientes(List<Cliente> listaClientes) {
-        this.listaClientes = listaClientes;
-    }
-
-    //Verificar Cliente
-
-    public boolean verificarCliente (String documentoCliente){
-        boolean existe = false;
-        for (Cliente cliente : listaClientes){
-            if (cliente.getDocumento().equalsIgnoreCase(documentoCliente)){
-                existe = true;
-                break;
-            }
-        }
-        return existe;
-    }
-
-    //Registrar Cliente
-
-    public boolean registrarCliente (Cliente clienteNuevo){
-        boolean registroExitoso = false;
-        boolean estaRegistrado = verificarCliente(clienteNuevo.getDocumento());
-        if (!estaRegistrado){
-            listaClientes.add(clienteNuevo);
-            registroExitoso = true;
-        } else {
-            System.out.println("El cliente ya existe dentro de la base de la base de datos, no es posible registrarlo por segunda vez");
-        }
-        return registroExitoso;
-    }
-
-    //Mostrar Clientes
-
-    public void mostrarClientes(){
-        for(Cliente cliente : listaClientes){
-            System.out.println("\n\n" + cliente.toString());
-        }
     }
 
     @Override
