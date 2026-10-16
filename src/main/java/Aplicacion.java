@@ -51,7 +51,7 @@ public class Aplicacion {
             sc.nextLine();
 
 
-            switch(opcion){
+            switch(opcion) {
                 case 1:
                     //Registrar Prendas
                     System.out.println("=====Registrar prenda=====");
@@ -118,11 +118,6 @@ public class Aplicacion {
                     }
 
 
-
-
-
-
-
                     break;
                 case 2:
                     //Registrar Cliente
@@ -130,7 +125,7 @@ public class Aplicacion {
                     String documentoCliente = sc.nextLine();
 
                     boolean documentoValido = empresa.verificarCliente(documentoCliente);
-                    if(documentoValido){
+                    if (documentoValido) {
                         System.out.println("Este documento es de un cliente ya registrado");
                         break;
                     }
@@ -176,11 +171,11 @@ public class Aplicacion {
                             default:
                                 System.out.println("Esta opcion es INVALIDA, ingrese una opcion valida");
                         }
-                    } while(0 > opcionCategoria || opcionCategoria > 4);
+                    } while (0 > opcionCategoria || opcionCategoria > 4);
 
                     Cliente nuevoCliente = new Cliente(documentoCliente, nombreCliente, correoCliente, telefonoCliente, codigoAfiliacionCliente, categoriaCliente);
                     boolean clienteRegistrado = empresa.registrarCliente(nuevoCliente);
-                    if (clienteRegistrado){
+                    if (clienteRegistrado) {
                         System.out.println("El cliente se registro correctamente");
                     } else {
                         System.out.println("El cliente no pudo registrarse en el sistema");
@@ -224,11 +219,6 @@ public class Aplicacion {
                     double salario = sc.nextDouble();
 
 
-
-
-
-
-
                     break;
                 case 4:
                     break;
@@ -236,14 +226,33 @@ public class Aplicacion {
                     //Registrar venta
 
                     System.out.println("Ingresa el documento del cliente");
-                    String documentoClienteVenta = sc.nextLine();
+                    String documentoComprador = sc.nextLine();
 
-                    if (!empresa.verificarCliente(documentoClienteVenta)){
+                    if (!empresa.verificarCliente(documentoComprador)) {
                         System.out.println("El cliente no esta registrado. Para realizar la venta, primero registre al cliente");
                         break;
                     }
 
+                    Cliente comprador = empresa.buscarCliente(documentoComprador);
 
+                    System.out.println("Ingresa el codigo de la venta");
+                    String codigoVenta = sc.nextLine();
+
+                    boolean ventaRegistrada = comprador.verificarVenta(codigoVenta);
+
+                    if (ventaRegistrada){
+                        System.out.println("La venta ya esta registrada, ya ha sido realizada anteriormente");
+                        break;
+                    }
+
+                    LocalDate fechaVenta = LocalDate.now();
+
+
+
+
+                    Venta ventaActual = new Venta();
+
+                    comprador.registrarVenta(null);
 
 
                     break;
