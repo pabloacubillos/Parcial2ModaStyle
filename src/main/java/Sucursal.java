@@ -139,5 +139,5 @@ return registroExitoso;
     }
 
 
-    // Metodo Agregar vendedor
+
 
