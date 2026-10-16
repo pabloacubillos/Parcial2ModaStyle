@@ -324,7 +324,7 @@ public class Aplicacion {
 
 
 
-                    Venta ventaActual = new Venta(codigoVenta, fechaVenta, comprador, , sucursalVenta);
+                    Venta ventaActual = new Venta(codigoVenta, fechaVenta, comprador, ,sucursalVenta);
 
                     comprador.registrarVenta(null);
 
@@ -364,11 +364,11 @@ public class Aplicacion {
                     System.out.print("Ingrese el código de la venta que desea consultar: ");
                     String codigoVentaBuscada = sc.nextLine();
 
-                    Sucursal sucursalVenta = empresa.obtenerSucursal(codigoSuc);
+                    Sucursal sucursalVenta2 = empresa.obtenerSucursal(codigoSuc);
 
                     Venta ventaEncontrada = null;
 
-                    for(Venta v : sucursalVenta.getListaVentas()){
+                    for(Venta v : sucursalVenta2.getListaVentas()){
                         if(v.getCodigo().equals(codigoVentaBuscada)){
                             ventaEncontrada = v;
                             break;
@@ -380,12 +380,14 @@ public class Aplicacion {
                                 "\nFecha: " + ventaEncontrada.getFecha());
 
                         double totalVenta = 0;
-                        for (DetalleVenta detalle : ventaEncontrada.getListaDetalles()) { // Asegúrate de tener esta lista en Venta
+                        for (DetalleVenta detalle : ventaEncontrada.getListaDetalles()) {
                             totalVenta += detalle.getSubtotal();
                         }
                         System.out.println("El total a pagar de esta centa es:"+totalVenta);
                     }else{
                         System.out.println("No existe una venta con ese codigo.");
+
+
                     }
                     break;
                 case 7:
@@ -394,8 +396,64 @@ public class Aplicacion {
                     break;
                 case 9:
                     // Consultar ventas de un vendedor
+                    System.out.println("\n===== CONSULTAR VENTAS DE UN VENDEDOR =====");
+                    String documentoBuscado = sc.nextLine();
 
+                    int opciones;
+                    String codigoSucursalBuscada = "";
+                    do {
+                        System.out.println("\nSeleccione la sucursal donde desea buscar:");
+                        System.out.println("1. Sucursal código S01");
+                        System.out.println("2. Sucursal código S02");
+                        System.out.print("Seleccione una opción (1 o 2): ");
 
+                        opciones = sc.nextInt();
+                        sc.nextLine();
+                        switch (opciones) {
+                            case 1:
+                                codigoSucursalBuscada = "S01";
+                                break;
+                            case 2:
+                                codigoSucursalBuscada = "S02";
+                                break;
+                            default:
+                                System.out.println("Opción inválida");
+                        }
+                    } while (opciones < 1 || opciones > 2);
+
+                    Sucursal sucursalEleccion = empresa.obtenerSucursal(codigoSucursalBuscada);
+                    if (sucursalEleccion != null) {
+                        System.out.print("Ingrese el número de documento del vendedor: ");
+                        String documentoDelVEndedor = sc.nextLine();
+
+                        boolean encontroVentas = false;
+                        System.out.println("\n--- Historial de Ventas del Vendedor en "
+                                + sucursalEleccion.getNombre() + " ---");
+
+                        // Recorrer ventas de la sucursal
+                        for (Venta v : sucursalEleccion.getListaVentas()) {
+                            // Verificar que ventas le pertenecen al vendedor elegido
+                            if(v.getVendedor() != null && v.getVendedor().getDocumento().equalsIgnoreCase(documentoDelVEndedor));
+                            encontroVentas = true;
+
+                          //Calcular el total de dicha venta
+                            double totalVenta = 0;
+                            if (v.getListaDetalles() != null) {
+                                for (DetalleVenta detalle : v.getListaDetalles()) {
+                                    totalVenta += detalle.getSubtotal();
+                                }
+                            }
+                            System.out.println(" Código Venta: " + v.getCodigo() +
+                                    "  Fecha: " + v.getFecha() +
+                                    "  Total: " + totalVenta);
+                        }
+                    if (!encontroVentas) {
+                        System.out.println("El vendedor con documento '" + documentoVendedor + "' no registra ventas en esta sucursal.");
+                    }
+
+            } else {
+                System.out.println("⚠️ La sucursal seleccionada no existe en la base de datos.");
+            }
 
                     break;
                 case 10:
