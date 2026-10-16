@@ -4,7 +4,18 @@ import java.util.Scanner;
 
 public class Aplicacion {
     public static void main (String[] args){
+        //Creacion objeto empresa
         Empresa empresa = new Empresa("ModaStyle", "901234567-8","Armenia, Quindío" );
+        //Creación objeto(2) sucursal
+
+        Sucursal sucursal1 = new Sucursal("S01", "Sucursal Centro", "Carrera 14", "Armenia", empresa);
+
+        Sucursal sucursal2 = new Sucursal("S02", "Sucursal Norte", "Avenida Bolivar", "Armenia", empresa);
+
+
+
+
+
 
         //Menú interactivo
         Scanner sc = new Scanner(System.in);
@@ -103,7 +114,7 @@ public class Aplicacion {
                     }
                     if (prenda != null) {
                         empresa.agregarPrenda(prenda);
-                        System.out.println("Prenda registrada exitosamente.");
+                        System.out.println("Prenda registrada correctamente.");
                     }
 
 

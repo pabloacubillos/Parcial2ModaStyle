@@ -72,5 +72,19 @@ public class Sucursal {
                 ", ciudad: " + ciudad + ". ";
     }
 
-    // Metodo Agregar vendedor
+    public void mostrarPrendasDisponibles() {
+        for (Inventario inventario : listaInventarios) {
+            if (inventario.getCantidadDisponible() > 0) {
+                System.out.println(
+                        "Prenda: " + inventario.getPrenda().getNombre()
+                                + " | Talla: " + inventario.getTalla()
+                                + " | Color: " + inventario.getColor()
+                                + " | Cantidad: " + inventario.getCantidadDisponible()
+                );
+            }
+        }
+    }
 }
+
+    // Metodo Agregar vendedor
+

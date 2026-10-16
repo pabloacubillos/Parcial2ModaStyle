@@ -149,4 +149,17 @@ public class Empresa {
     public void agregarPrenda(Prenda prenda) {
         listaPrendas.add(prenda);
     }
+
+    public Sucursal buscarSucursal(String codigo) {
+        for (Sucursal sucursal : listaSucursales) {
+            if (sucursal.getCodigo().equalsIgnoreCase(codigo)) {
+                return sucursal;
+            }
+        }
+        return null;
+    }
+//registrar sucursal
+    public void agregarSucursal(Sucursal sucursal) {
+        listaSucursales.add(sucursal);
+    }
 }
