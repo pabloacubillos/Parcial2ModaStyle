@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -412,7 +413,6 @@ public class Aplicacion {
 
 
                     break;
-
                 case 6:
                     // Consultar total de una venta
                     System.out.println("\n===== CONSULTAR TOTAL DE UNA VENTA =====");
@@ -422,7 +422,7 @@ public class Aplicacion {
 
                     do {
                         System.out.println("Ingrese el el numero de la sucursal a la cual quiere consultar " +
-                                "la venta.");
+                                    "la venta.");
                         System.out.println("1. Sucursal codigo S01");
                         System.out.println("2. Sucursal codigo S02");
                         System.out.print("Seleccione una opción: ");
@@ -504,8 +504,78 @@ public class Aplicacion {
 
 
                 case 8:
+
+
                     break;
                 case 9:
+                    System.out.println("\n===== CONSULTAR VENTAS DE UN VENDEDOR POR SUCURSAL =====");
+                    int opciones;
+                    String codigoSucursalBuscada = "";
+                    do {
+                        System.out.println("\nSeleccione la sucursal donde desea buscar:");
+                        System.out.println("1. Sucursal código S01");
+                        System.out.println("2. Sucursal código S02");
+                        System.out.print("Seleccione una opción (1 o 2): ");
+
+                        opciones = sc.nextInt();
+                        sc.nextLine();
+
+                        switch (opciones) {
+                            case 1:
+                                codigoSucursalBuscada = "S01";
+                                break;
+                            case 2:
+                                codigoSucursalBuscada = "S02";
+                                break;
+                            default:
+                                System.out.println("Opción inválida");
+                        }
+                    } while (opciones < 1 || opciones > 2);
+
+
+                    Sucursal sucursalElegidaVendedor = empresa.obtenerSucursal(codigoSucursalBuscada);
+
+                    if (sucursalElegidaVendedor != null) {
+
+                        System.out.print("Ingrese el número de documento del vendedor: ");
+                        String documentoDelVendedor = sc.nextLine();
+
+                        boolean encontroVentas = false;
+                        System.out.println("\n--- Historial de Ventas del Vendedor en " + sucursalElegidaVendedor.getNombre() + " ---");
+
+                        // Recorremos las ventas de la sucursal elegida
+                        for (Venta v : sucursalElegidaVendedor.getListaVentas()) {
+
+                            //Verificamos cuales pertenecen al vendedor elegido
+                            if (v.getVendedor() != null && v.getVendedor().getDocumento().equalsIgnoreCase(documentoDelVendedor)) {
+
+                                encontroVentas = true;
+
+                                // Calculamos el total de esa venta
+                                double totalVenta = 0;
+                                if (v.getListaDetalles() != null) {
+                                    for (DetalleVenta detalle : v.getListaDetalles()) {
+                                        totalVenta += detalle.getSubtotal();
+                                    }
+                                }
+
+                                // Mostramos el reporte de la venta
+                                System.out.println("• Código Venta: " + v.getCodigo() +
+                                        " | Fecha: " + v.getFecha() +
+                                        " | Total: $" + totalVenta);
+                            }
+                        }
+
+
+                        if (!encontroVentas) {
+                            System.out.println("⚠️ El vendedor con documento '" + documentoDelVendedor +
+                                    " no registra ventas en esta sucursal.");
+                        }
+
+                    } else {
+                        System.out.println("La sucursal seleccionada no existe en la base de datos.");
+                    }
+
                     break;
 
                 case 10: {
@@ -558,4 +628,6 @@ public class Aplicacion {
         sc.close();
 
     }
+
+
 }
