@@ -326,6 +326,11 @@ public class Aplicacion {
                     String documentoComprador = sc.nextLine();
 
                     if (!empresa.verificarCliente(documentoComprador)) {
+
+                    System.out.println("Ingresa el documento del cliente");
+                    String documentoClienteVenta = sc.nextLine();
+
+                    if (!empresa.verificarCliente(documentoClienteVenta)){
                         System.out.println("El cliente no esta registrado. Para realizar la venta, primero registre al cliente");
                         break;
                     }
