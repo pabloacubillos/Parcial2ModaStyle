@@ -55,7 +55,7 @@ public class Aplicacion {
             sc.nextLine();
 
 
-            switch(opcion){
+            switch(opcion) {
                 case 1:
                     //Registrar Prendas
                     System.out.println("=====Registrar prenda=====");
@@ -235,86 +235,24 @@ public class Aplicacion {
 
                     break;
 
+                case 4:
+                    System.out.println("===== CONSULTAR PRENDAS DISPONIBLES =====");
 
-                case 4: {
-                    System.out.println("===== REGISTRAR EXISTENCIAS =====");
+                    System.out.println("Sucursales disponibles:");
+                    System.out.println("S01 - Sucursal Centro");
+                    System.out.println("S02 - Sucursal Norte");
 
-                    System.out.print("Ingrese el codigo de la prenda: ");
-                    String codigoPrenda = sc.nextLine();
-
-                    Prenda prendaSeleccionada = null;
-
-                    for (Prenda prendaRecorrida : empresa.getListaPrendas()) {
-                        if (prendaRecorrida.getCodigo().equalsIgnoreCase(codigoPrenda)) {
-                            prendaSeleccionada = prendaRecorrida;
-                            break;
-                        }
-                    }
-
-                    if (prendaSeleccionada == null) {
-                        System.out.println("No existe una prenda con ese codigo.");
-                        break;
-                    }
-
-                    System.out.print("Ingrese el codigo de la sucursal (S01 o S02): ");
+                    System.out.print("Ingrese el codigo de la sucursal: ");
                     String codigoSucursal = sc.nextLine();
 
                     Sucursal sucursalSeleccionada = empresa.buscarSucursal(codigoSucursal);
 
-                    if (sucursalSeleccionada == null) {
+                    if (sucursalSeleccionada != null) {
+                        sucursalSeleccionada.mostrarPrendasDisponibles();
+                    } else {
                         System.out.println("No existe una sucursal con ese codigo.");
-                        break;
                     }
-
-                    System.out.println("Tallas disponibles:");
-                    for (TallaPrenda talla : TallaPrenda.values()) {
-                        System.out.println(talla);
-                    }
-
-                    System.out.print("Ingrese la talla: ");
-                    String tallaTexto = sc.nextLine().toUpperCase();
-
-                    TallaPrenda tallaSeleccionada;
-
-                    try {
-                        tallaSeleccionada = TallaPrenda.valueOf(tallaTexto);
-                    } catch (IllegalArgumentException e) {
-                        System.out.println("La talla ingresada no es valida.");
-                        break;
-                    }
-
-                    System.out.print("Ingrese el color: ");
-                    String color = sc.nextLine();
-
-                    System.out.print("Ingrese la cantidad disponible: ");
-
-                    int cantidad;
-
-                    try {
-                        cantidad = Integer.parseInt(sc.nextLine());
-
-                        if (cantidad <= 0) {
-                            System.out.println("La cantidad debe ser mayor que cero.");
-                            break;
-                        }
-                    } catch (NumberFormatException e) {
-                        System.out.println("Debe ingresar una cantidad numerica.");
-                        break;
-                    }
-
-                    Inventario inventario = new Inventario(
-                            prendaSeleccionada,
-                            sucursalSeleccionada,
-                            tallaSeleccionada,
-                            color,
-                            cantidad
-                    );
-
-                    sucursalSeleccionada.agregarInventario(inventario);
-
-                    System.out.println("Existencias registradas correctamente.");
                     break;
-                }
 
                 case 5:
                     //Registrar venta
@@ -333,27 +271,9 @@ public class Aplicacion {
                     break;
                 case 6:
                     break;
-                case 7: {
-                    System.out.println("===== CONSULTAR PRENDAS DISPONIBLES =====");
+                case 7:
 
-                    System.out.println("Sucursales disponibles:");
-                    System.out.println("S01 - Sucursal Centro");
-                    System.out.println("S02 - Sucursal Norte");
-
-                    System.out.print("Ingrese el codigo de la sucursal: ");
-                    String codigoSucursal = sc.nextLine();
-
-                    Sucursal sucursalSeleccionada =
-                            empresa.buscarSucursal(codigoSucursal);
-
-                    if (sucursalSeleccionada != null) {
-                        sucursalSeleccionada.mostrarPrendasDisponibles();
-                    } else {
-                        System.out.println("No existe una sucursal con ese codigo.");
-                    }
                     break;
-                }
-
                 case 8:
                     break;
                 case 9:
