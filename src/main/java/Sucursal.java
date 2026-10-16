@@ -25,21 +25,42 @@ public class Sucursal {
         listaClientes = new ArrayList<>();
     }
 
-    public String getCodigo() {return codigo;}
-    public void setCodigo(String codigo) {this.codigo = codigo;}
+    public String getCodigo() {
+        return codigo;
+    }
 
-    public String getNombre() {return nombre;}
-    public void setNombre(String nombre) {this.nombre = nombre;}
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
 
-    public String getDireccion() {return direccion;}
-    public void setDireccion(String direccion) {this.direccion = direccion;}
+    public String getNombre() {
+        return nombre;
+    }
 
-    public String getCiudad() {return ciudad;}
-    public void setCiudad(String ciudad) {this.ciudad = ciudad;}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
 
     public Empresa getEmpresa() {
         return empresa;
     }
+
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
     }
@@ -47,6 +68,7 @@ public class Sucursal {
     public List<Inventario> getListaInventarios() {
         return listaInventarios;
     }
+
     public void setListaInventarios(List<Inventario> listaInventarios) {
         this.listaInventarios = listaInventarios;
     }
@@ -54,6 +76,7 @@ public class Sucursal {
     public List<Vendedor> getListaVendedores() {
         return listaVendedores;
     }
+
     public void setListaVendedores(List<Vendedor> listaVendedores) {
         this.listaVendedores = listaVendedores;
     }
@@ -61,6 +84,7 @@ public class Sucursal {
     public List<Venta> getListaVentas() {
         return listaVentas;
     }
+
     public void setListaVentas(List<Venta> listaVentas) {
         this.listaVentas = listaVentas;
     }
@@ -68,16 +92,17 @@ public class Sucursal {
     public List<Cliente> getListaClientes() {
         return listaClientes;
     }
+
     public void setListaClientes(List<Cliente> listaClientes) {
         this.listaClientes = listaClientes;
     }
 
     //Verificar Cliente
 
-    public boolean verificarCliente (String documentoCliente){
+    public boolean verificarCliente(String documentoCliente) {
         boolean existe = false;
-        for (Cliente cliente : listaClientes){
-            if (cliente.getDocumento().equalsIgnoreCase(documentoCliente)){
+        for (Cliente cliente : listaClientes) {
+            if (cliente.getDocumento().equalsIgnoreCase(documentoCliente)) {
                 existe = true;
                 break;
             }
@@ -87,10 +112,10 @@ public class Sucursal {
 
     //Registrar Cliente
 
-    public boolean registrarCliente (Cliente clienteNuevo){
+    public boolean registrarCliente(Cliente clienteNuevo) {
         boolean registroExitoso = false;
         boolean estaRegistrado = verificarCliente(clienteNuevo.getDocumento());
-        if (!estaRegistrado){
+        if (!estaRegistrado) {
             listaClientes.add(clienteNuevo);
             registroExitoso = true;
         } else {
@@ -101,8 +126,8 @@ public class Sucursal {
 
     //Mostrar Clientes
 
-    public void mostrarClientes(){
-        for(Cliente cliente : listaClientes){
+    public void mostrarClientes() {
+        for (Cliente cliente : listaClientes) {
             System.out.println("\n\n" + cliente.toString());
         }
     }
@@ -115,6 +140,41 @@ public class Sucursal {
                 ", direccion: " + direccion +
                 ", ciudad: " + ciudad + ". ";
     }
+    // Metodo para verificar vendedor
 
-    // Metodo Agregar vendedor
+    public boolean verificarVendedor(String documentoVendedor) {
+        boolean existe = false;
+        for (Vendedor vendedor : listaVendedores) {
+            if (vendedor.getDocumento().equalsIgnoreCase(documentoVendedor)) {
+                existe = true;
+                break;
+
+            }
+        }
+        return existe;
+    }
+
+    // Metodo registrar vendedor
+
+    public boolean registrarVendedor(Vendedor vendedorNuevo, String codigoSucursal, Empresa miEmpresa) {
+        boolean registroExitoso = false;
+        boolean estaRegistrado = verificarVendedor(vendedorNuevo.getDocumento());
+        boolean sucursalExiste = miEmpresa.encontrarSucursal(codigoSucursal);
+        if (estaRegistrado) {
+            System.out.println("el vendedor con este documento ya existe");
+        } else if (!sucursalExiste) {
+            System.out.println("La sucursal con el codigo" + codigoSucursal +
+                    " no existe en la base de datos");
+        } else {
+            Sucursal sucursalAsociada = miEmpresa.obtenerSucursal(codigoSucursal);
+            vendedorNuevo.setSucursal(sucursalAsociada);
+
+            listaVendedores.add(vendedorNuevo);
+            registroExitoso = true;
+            System.out.println("Registro exitoso");
+
+        }
+return registroExitoso;
+    }
+
 }

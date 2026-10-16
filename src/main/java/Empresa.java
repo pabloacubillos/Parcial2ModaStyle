@@ -50,4 +50,30 @@ public class Empresa {
     public void setListaSucursales(List<Sucursal> listaSucursales) {
         this.listaSucursales = listaSucursales;
     }
+
+// Metodo para ver si la sucursal si existe
+    public boolean encontrarSucursal(String codigoSucursal) {
+        boolean encontrada = false;
+
+        for (Sucursal s : listaSucursales) {
+            if (s.getCodigo().equals(codigoSucursal)) {
+                encontrada = true;
+                break;
+            }
+        }
+
+        return encontrada;
+    }
+    public Sucursal obtenerSucursal(String codigoSucursal) {
+        Sucursal sucursalEncontrada = null;
+
+        for (Sucursal s : listaSucursales) {
+            if (s.getCodigo().equals(codigoSucursal)) {
+                sucursalEncontrada = s;
+                break;
+            }
+        }
+
+        return sucursalEncontrada;
+    }
 }

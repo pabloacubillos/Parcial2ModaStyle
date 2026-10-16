@@ -40,7 +40,7 @@ public class Aplicacion {
             sc.nextLine();
 
 
-            switch(opcion){
+            switch(opcion) {
                 case 1:
                     //Registrar Prendas
                     System.out.println("=====Registrar prenda=====");
@@ -92,7 +92,7 @@ public class Aplicacion {
                             default:
                                 System.out.println("Esta opcion es INVALIDA, ingrese una opcion valida");
                         }
-                    } while(0 > opcionCategoria || opcionCategoria > 4);
+                    } while (0 > opcionCategoria || opcionCategoria > 4);
 
                     Cliente nuevoCliente = new Cliente(documentoCliente, nombre, correo, telefono, codigoAfiliacion, categoria);
                     break;
@@ -127,16 +127,20 @@ public class Aplicacion {
 
                     System.out.println("-Dia: ");
                     int dia = sc.nextInt();
-                    LocalDate fechaContratacin = LocalDate.of(anio, mes, dia);
+                    LocalDate fechaContratacion = LocalDate.of(anio, mes, dia);
                     sc.nextLine();
 
                     System.out.println("Ingrese el salario del vendedor: ");
                     double salario = sc.nextDouble();
+                    sc.nextLine();
 
+                    System.out.println("Ingrese el codigo de la sucursal " +
+                    "a la pertenecera el vendedor");
+                    String codigoSucursal = sc.nextLine();
+                    Sucursal sucursal = miEmpresa.
 
-
-
-
+                   Vendedor nuevoVendedor = new Vendedor(documentoVendedor, nombreVendedor, correoVendedor,
+                           telefonoVendedor, codigoVendedor, fechaContratacion, salario, null);
 
 
                     break;
