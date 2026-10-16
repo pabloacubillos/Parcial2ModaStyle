@@ -339,15 +339,15 @@ public class Aplicacion {
 
 
                 case 5: {
-                    //Registrar venta
+                    System.out.println("\n===== REGISTRAR VENTA =====");
+
                     String codigoSucursalVenta = "";
                     int sucursalElegidaVenta;
 
                     do {
-                        System.out.println("Ingrese el el numero de la sucursal a la cual quiere consultar " +
-                                "la venta.");
-                        System.out.println("1. Sucursal codigo S01");
-                        System.out.println("2. Sucursal codigo S02");
+                        System.out.println("Ingrese el número de la sucursal donde se realizará la venta:");
+                        System.out.println("1. Sucursal código S01");
+                        System.out.println("2. Sucursal código S02");
                         System.out.print("Seleccione una opción: ");
 
                         sucursalElegidaVenta = sc.nextInt();
@@ -357,60 +357,120 @@ public class Aplicacion {
                             case 1:
                                 codigoSucursalVenta = "S01";
                                 break;
-
                             case 2:
                                 codigoSucursalVenta = "S02";
                                 break;
                             default:
-                                System.out.println("Esta opcion es INVALIDA");
-
+                                System.out.println("Opción inválida. Intente de nuevo.");
                         }
                     } while (sucursalElegidaVenta < 1 || sucursalElegidaVenta > 2);
+
                     Sucursal sucursalVenta = empresa.obtenerSucursal(codigoSucursalVenta);
 
-                    System.out.println("Ingresa el documento del vendedor que realiza la venta:");
+                    System.out.print("Ingresa el documento del vendedor que realiza la venta: ");
                     String documentoVendedorVenta = sc.nextLine();
 
                     if (!sucursalVenta.verificarVendedor(documentoVendedorVenta)) {
-                        System.out.println("El vendedor no existe");
+                        System.out.println("El vendedor no existe en esta sucursal.");
                         break;
                     }
                     Vendedor vendedorVenta = sucursalVenta.obtenerVendedor(documentoVendedorVenta);
 
-                    System.out.println("Ingresa el documento del cliente que realiza la compra:");
-                    String documentoComprador = sc.nextLine();
+                    System.out.print("Ingresa el documento del cliente: ");
+                    String documentoClienteVenta = sc.nextLine();
 
-                    if (!empresa.verificarCliente(documentoComprador)) {
-                        System.out.println("El cliente no esta registrado. Para realizar la venta, primero registre al cliente");
+                    if (!empresa.verificarCliente(documentoClienteVenta)) {
+                        System.out.println("El cliente no está registrado. Para realizar la venta, primero se debe registrar al cliente.");
                         break;
                     }
 
-                    Cliente comprador = empresa.buscarCliente(documentoComprador);
+                    Cliente comprador = empresa.buscarCliente(documentoClienteVenta);
 
-                    System.out.println("Ingresa el codigo de la venta");
+                    System.out.print("Ingresa el código de la venta: ");
                     String codigoVenta = sc.nextLine();
-
-                    boolean ventaRegistrada = comprador.verificarVenta(codigoVenta);
-
-                    if (ventaRegistrada) {
-                        System.out.println("La venta ya esta registrada, ya ha sido realizada anteriormente");
-                        break;
-                    }
 
                     LocalDate fechaVenta = LocalDate.now();
 
-                    System.out.println("");
-
-                    DetalleVenta detalleVenta = new DetalleVenta()
-
                     Venta ventaActual = new Venta(codigoVenta, fechaVenta, comprador, vendedorVenta, sucursalVenta);
-                    ventaActual.registrarDetalleVenta();
 
+                    System.out.print("Ingresar la cantidad de diferentes prendas que se vendera: ");
+                    int cantidadProductos = sc.nextInt();
+                    sc.nextLine();
+
+                    for (int i = 0; i < cantidadProductos; i++) {
+                        System.out.println("\nProducto: " + (i + 1));
+                        System.out.print("Ingresa el codigo de la prenda: ");
+                        String codigoPrenda = sc.nextLine();
+
+                        Prenda prendaComprada = sucursalVenta.obtenerPrenda(codigoPrenda);
+
+
+                        if (prendaComprada != null) {
+                            System.out.print("Ingresa la cantidad comprada: ");
+                            int cantidadComprada = sc.nextInt();
+                            sc.nextLine();
+
+                            double precioFinal = prendaComprada.getPrecio();
+                            double subtotal = precioFinal * cantidadComprada;
+
+                            int opcionTalla = 0;
+                            TallaPrenda tallaPrenda = null;
+
+                            do {
+                                System.out.println("Selecciona la talla de la prenda:" +
+                                        "\n1. XS" +
+                                        "\n2. S" +
+                                        "\n3. L" +
+                                        "\n4. M" +
+                                        "\n5. XL");
+                                opcionTalla = sc.nextInt();
+
+                                switch (opcionTalla) {
+                                    case 1:
+                                        tallaPrenda = TallaPrenda.XS;
+                                        break;
+
+                                    case 2:
+                                        tallaPrenda = TallaPrenda.S;
+                                        break;
+
+                                    case 3:
+                                        tallaPrenda = TallaPrenda.L;
+                                        break;
+
+                                    case 4:
+                                        tallaPrenda = TallaPrenda.M;
+                                        break;
+
+                                    case 5:
+                                        tallaPrenda = TallaPrenda.XL;
+                                        break;
+
+                                    default:
+                                        System.out.println("Esta opcion no es valida");
+                                        opcionTalla = 0;
+                                }
+                            }while(opcionTalla == 0);
+
+                            System.out.println("Ingresa el color de la prenda:");
+                            String color = sc.nextLine();
+
+                            System.out.println("Ingresar la cantidad disponible de esta prenda:");
+                            int cantidadDisponible = sc.nextInt();
+
+                            Inventario inventario = new Inventario(prendaComprada, sucursalVenta, tallaPrenda, color, cantidadDisponible);
+                            DetalleVenta detalle = new DetalleVenta(cantidadComprada, precioFinal, subtotal, ventaActual, inventario);
+
+                            ventaActual.getListaDetalles().add(detalle);
+                        } else {
+                            System.out.println("La prenda no existe. No se pudo agregar este detalle.");
+                        }
+                    }
                     comprador.registrarVenta(ventaActual);
                     vendedorVenta.registrarVenta(ventaActual);
                     sucursalVenta.registrarVenta(ventaActual);
 
-
+                    System.out.println("Venta registrada con exito");
                     break;
                 }
                 case 6:

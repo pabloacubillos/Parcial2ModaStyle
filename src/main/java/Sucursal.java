@@ -168,6 +168,8 @@ public class Sucursal {
     public void agregarInventario(Inventario inventario) {
         listaInventarios.add(inventario);
     }
+
+
     public boolean verificarVenta (String codigoVenta){
         boolean existe = false;
         for (Venta venta : listaVentas){
@@ -177,7 +179,8 @@ public class Sucursal {
             }
         }
         return existe;
-}
+    }
+
     public boolean registrarVenta (Venta nuevaVenta){
         boolean registroExitoso = false;
         boolean estaRegistrada = verificarVenta(nuevaVenta.getCodigo());
