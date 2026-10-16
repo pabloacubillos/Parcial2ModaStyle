@@ -6,12 +6,15 @@ public class DetalleVenta {
     private double PrecioUnitarioFinal;
     //Precio unitario final multiplicado por la cantidad.
     private double subtotal;
-
-    public DetalleVenta(int cantidad, double precioUnitarioFinal, double subtotal) {
+    private Prenda prenda;
+    public DetalleVenta(int cantidad, double precioUnitarioFinal, double subtotal, Prenda prenda) {
         this.cantidad = cantidad;
         PrecioUnitarioFinal = precioUnitarioFinal;
         this.subtotal = subtotal;
+
     }
+
+
 
     public int getCantidad() {return cantidad;}
 
