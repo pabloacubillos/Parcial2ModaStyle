@@ -285,8 +285,33 @@ public class Aplicacion {
                         System.out.println("Esta sucursal no existe");
                         break;
                     }
-                    Sucursal sucursalVenta= empresa.obtenerSucursal(codigoSucursalVenta);
 
+                    int sucursalVenta;
+
+                    do {
+                        System.out.println("Ingrese el el numero de la sucursal a la cual quiere consultar " +
+                                "la venta.");
+                        System.out.println("1. Sucursal codigo S01");
+                        System.out.println("2. Sucursal codigo S02");
+                        System.out.print("Seleccione una opción: ");
+
+                        sucursalVenta = sc.nextInt();
+                        sc.nextLine();
+
+                        switch (sucursalVenta) {
+                            case 1:
+                                codigoSuc= "S01";
+                                break;
+
+                            case 2:
+                                codigoSuc= "S02";
+                                break;
+                            default:
+                                System.out.println("Esta opcion es INVALIDA");
+
+                        }
+                    } while (sucursalVenta < 1 || suc > 2);
+                    Sucursal sucursalVenta = empresa.obtenerSucursal(codigoSucursalVenta);
 
                     System.out.println("Ingresa el documento del vendedor que realiza la venta:");
                     String documentoVendedorVenta = sc.nextLine();
@@ -295,9 +320,7 @@ public class Aplicacion {
                         System.out.println("El vendedor no existe");
                         break;
                     }
-                    Vendedor vendedor = sucursalVenta.obtenerVendedor(documentoVendedorVenta);
-
-
+                    Vendedor vendedorVenta = sucursalVenta.obtenerVendedor(documentoVendedorVenta);
 
                     System.out.println("Ingresa el documento del cliente que realiza la compra:");
                     String documentoComprador = sc.nextLine();
@@ -321,12 +344,9 @@ public class Aplicacion {
 
                     LocalDate fechaVenta = LocalDate.now();
 
+                    Venta ventaActual = new Venta(codigoVenta, fechaVenta, comprador, vendedorVenta , sucursalVenta);
 
-
-
-                    Venta ventaActual = new Venta(codigoVenta, fechaVenta, comprador, , sucursalVenta);
-
-                    comprador.registrarVenta(null);
+                    comprador.registrarVenta(ventaActual);
 
 
                     break;
@@ -364,11 +384,11 @@ public class Aplicacion {
                     System.out.print("Ingrese el código de la venta que desea consultar: ");
                     String codigoVentaBuscada = sc.nextLine();
 
-                    Sucursal sucursalVenta = empresa.obtenerSucursal(codigoSuc);
+                    Sucursal sucursalVenta2 = empresa.obtenerSucursal(codigoSuc);
 
                     Venta ventaEncontrada = null;
 
-                    for(Venta v : sucursalVenta.getListaVentas()){
+                    for(Venta v : sucursalVenta2.getListaVentas()){
                         if(v.getCodigo().equals(codigoVentaBuscada)){
                             ventaEncontrada = v;
                             break;
