@@ -66,7 +66,7 @@ public class Aplicacion {
 
                     System.out.println("Seleccione el tipo de prenda:");
                     System.out.println("1. Camiseta");
-                    System.out.println("2. Pantalon");
+                    System.out.println("2. Pantalón");
                     System.out.println("3. Vestido");
                     System.out.println("4. Chaqueta");
                     System.out.println("5. Calzado");
@@ -74,6 +74,43 @@ public class Aplicacion {
                     System.out.print("Opcion: ");
                     int tipo = sc.nextInt();
                     sc.nextLine();
+
+                    Prenda prenda = null;
+
+                    switch (tipo) {
+                        case 1:
+                            prenda = new Camiseta(codigo, marca, nombre, precio);
+                            break;
+
+                        case 2:
+                            prenda = new Pantalon(codigo, marca, nombre, precio);
+                            break;
+
+                        case 3:
+                            prenda = new Vestido(codigo, marca, nombre, precio);
+                            break;
+
+                        case 4:
+                            prenda = new Chaqueta(codigo, marca, nombre, precio);
+                            break;
+
+                        case 5:
+                            prenda = new Calzado(codigo, marca, nombre, precio);
+                            break;
+
+                        default:
+                            System.out.println("Tipo de prenda no valido.");
+                            break;
+                    }
+                    if (prenda != null) {
+                        empresa.agregarPrenda(prenda);
+                        System.out.println("Prenda registrada exitosamente.");
+                    }
+
+
+
+
+
 
 
                     break;

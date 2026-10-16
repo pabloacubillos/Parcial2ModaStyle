@@ -118,4 +118,9 @@ public class Empresa {
             System.out.println("\n\n" + cliente.toString());
         }
     }
+
+    //Agregar prenda a la lista
+    public void agregarPrenda(Prenda prenda) {
+        listaPrendas.add(prenda);
+    }
 }
