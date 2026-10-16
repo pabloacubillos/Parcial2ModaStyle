@@ -12,6 +12,10 @@ public class Aplicacion {
 
         Sucursal sucursal2 = new Sucursal("S02", "Sucursal Norte", "Avenida Bolivar", "Armenia", empresa);
 
+        //Agregar sucursales a empresa
+        empresa.agregarSucursal(sucursal1);
+        empresa.agregarSucursal(sucursal2);
+
 
 
 
@@ -220,8 +224,26 @@ public class Aplicacion {
 
 
                     break;
+
                 case 4:
+                    System.out.println("===== CONSULTAR PRENDAS DISPONIBLES =====");
+
+                    System.out.println("Sucursales disponibles:");
+                    System.out.println("S01 - Sucursal Centro");
+                    System.out.println("S02 - Sucursal Norte");
+
+                    System.out.print("Ingrese el codigo de la sucursal: ");
+                    String codigoSucursal = sc.nextLine();
+
+                    Sucursal sucursalSeleccionada = empresa.buscarSucursal(codigoSucursal);
+
+                    if (sucursalSeleccionada != null) {
+                        sucursalSeleccionada.mostrarPrendasDisponibles();
+                    } else {
+                        System.out.println("No existe una sucursal con ese codigo.");
+                    }
                     break;
+
                 case 5:
                     //Registrar venta
 

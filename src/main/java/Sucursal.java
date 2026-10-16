@@ -73,6 +73,8 @@ public class Sucursal {
     }
 
     public void mostrarPrendasDisponibles() {
+        boolean hayPrendas = false;
+
         for (Inventario inventario : listaInventarios) {
             if (inventario.getCantidadDisponible() > 0) {
                 System.out.println(
@@ -81,10 +83,17 @@ public class Sucursal {
                                 + " | Color: " + inventario.getColor()
                                 + " | Cantidad: " + inventario.getCantidadDisponible()
                 );
+
+                hayPrendas = true;
             }
         }
+
+        if (!hayPrendas) {
+            System.out.println("Esta sucursal no tiene prendas disponibles.");
+        }
     }
-}
+    }
+
 
     // Metodo Agregar vendedor
 
