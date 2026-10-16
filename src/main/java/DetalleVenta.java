@@ -18,7 +18,10 @@ public class DetalleVenta {
         this.inventario = inventario;
     }
 
+
+
     public int getCantidad() {return cantidad;}
+
     public void setCantidad(int cantidad) {this.cantidad = cantidad;}
 
     public double getPrecioUnitarioFinal() {return precioUnitarioFinal;}
@@ -26,6 +29,7 @@ public class DetalleVenta {
         this.precioUnitarioFinal = precioUnitarioFinal;}
 
     public double getSubtotal() {return subtotal;}
+
     public void setSubtotal(double subtotal) {this.subtotal = subtotal;}
 
     public Venta getVenta() {return venta;}

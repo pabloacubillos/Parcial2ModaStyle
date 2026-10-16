@@ -1,5 +1,7 @@
 import java.sql.SQLOutput;
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Aplicacion {
@@ -129,7 +131,7 @@ public class Aplicacion {
                     String documentoCliente = sc.nextLine();
 
                     boolean documentoValido = empresa.verificarCliente(documentoCliente);
-                    if(documentoValido){
+                    if (documentoValido) {
                         System.out.println("Este documento es de un cliente ya registrado");
                         break;
                     }
@@ -175,11 +177,11 @@ public class Aplicacion {
                             default:
                                 System.out.println("Esta opcion es INVALIDA, ingrese una opcion valida");
                         }
-                    } while(0 > opcionCategoria || opcionCategoria > 4);
+                    } while (0 > opcionCategoria || opcionCategoria > 4);
 
                     Cliente nuevoCliente = new Cliente(documentoCliente, nombreCliente, correoCliente, telefonoCliente, codigoAfiliacionCliente, categoriaCliente);
                     boolean clienteRegistrado = empresa.registrarCliente(nuevoCliente);
-                    if (clienteRegistrado){
+                    if (clienteRegistrado) {
                         System.out.println("El cliente se registro correctamente");
                     } else {
                         System.out.println("El cliente no pudo registrarse en el sistema");
@@ -650,14 +652,14 @@ public class Aplicacion {
 
                                 // Mostramos el reporte de la venta
                                 System.out.println("• Código Venta: " + v.getCodigo() +
-                                        " | Fecha: " + v.getFecha() +
-                                        " | Total: $" + totalVenta);
+                                        " Fecha: " + v.getFecha() +
+                                        " Total: $" + totalVenta);
                             }
                         }
 
 
                         if (!encontroVentas) {
-                            System.out.println("⚠️ El vendedor con documento '" + documentoDelVendedor +
+                            System.out.println("El vendedor con documento '" + documentoDelVendedor +
                                     " no registra ventas en esta sucursal.");
                         }
 
@@ -732,6 +734,69 @@ public class Aplicacion {
                     break;
                 }
                 case 12:
+                    System.out.println("\n===== REPORTE: PRENDA MÁS VENDIDA =====");
+
+
+                    java.util.ArrayList<String> listaReferencias = new java.util.ArrayList<>();
+                    java.util.ArrayList<Integer> listaCantidades = new java.util.ArrayList<>();
+
+
+                    for (Sucursal sucursal : empresa.getListaSucursales()) {
+
+
+                        for (Venta venta : sucursal.getListaVentas()) {
+
+
+                            if (venta.getListaDetalles() != null) {
+                                for (DetalleVenta detalle : venta.getListaDetalles()) {
+
+
+                                    Inventario inv = detalle.getInventario();
+
+                                    if (inv != null && inv.getPrenda() != null) {
+                                        String referencia = inv.getPrenda().getCodigo();
+                                        int cantidadComprada = detalle.getCantidad();
+
+
+                                        int indice = listaReferencias.indexOf(referencia);
+
+                                        if (indice != -1) {
+
+                                            int cantidadActual = listaCantidades.get(indice);
+                                            listaCantidades.set(indice, cantidadActual + cantidadComprada);
+                                        } else {
+
+                                            listaReferencias.add(referencia);
+                                            listaCantidades.add(cantidadComprada);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+
+                    if (!listaCantidades.isEmpty()) {
+                        int mayorCantidad = -1;
+                        int indiceMayor = -1;
+
+                        for (int i = 0; i < listaCantidades.size(); i++) {
+                            if (listaCantidades.get(i) > mayorCantidad) {
+                                mayorCantidad = listaCantidades.get(i);
+                                indiceMayor = i;
+                            }
+                        }
+
+
+                        String referenciaMasVendida = listaReferencias.get(indiceMayor);
+
+                        System.out.println("La prenda más vendida es!");
+                        System.out.println("• Referencia / Código: " + referenciaMasVendida);
+                        System.out.println("• Unidades totales vendidas: " + mayorCantidad);
+
+                    } else {
+                        System.out.println("Aún no hay suficientes registros de ventas para determinar la prenda más vendida.");
+                    }
                     break;
                 case 0:
                     // Salir
