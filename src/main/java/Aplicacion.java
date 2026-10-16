@@ -6,7 +6,6 @@ public class Aplicacion {
     public static void main (String[] args){
         Empresa empresa = new Empresa("ModaStyle", "901234567-8","Armenia, Quindío" );
 
-
         //Menú interactivo
         Scanner sc = new Scanner(System.in);
         int opcion;
@@ -82,21 +81,27 @@ public class Aplicacion {
                     System.out.println("Ingresa el numero de documento del cliente");
                     String documentoCliente = sc.nextLine();
 
+                    boolean documentoValido = empresa.verificarCliente(documentoCliente);
+                    if(documentoValido){
+                        System.out.println("Este documento es de un cliente ya registrado");
+                        break;
+                    }
+
                     System.out.println("Ingresa el nombre del cliente");
-                    String nombre = sc.nextLine();
+                    String nombreCliente = sc.nextLine();
 
                     System.out.println("Ingresa el correo electronico del cliente");
-                    String correo = sc.nextLine();
+                    String correoCliente = sc.nextLine();
 
                     System.out.println("Ingresa el numero de telefono del cliente");
-                    String telefono = sc.nextLine();
+                    String telefonoCliente = sc.nextLine();
 
                     System.out.println("Ingresa el codigo de afiliacion del cliente");
-                    String codigoAfiliacion = sc.nextLine();
+                    String codigoAfiliacionCliente = sc.nextLine();
 
-                    Categoria categoria = null;
+                    Categoria categoriaCliente = null;
 
-                    System.out.println("Elige el numero de la categoria a la que pertenece el cliente:" +
+                    System.out.println("Ingresa el numero correspondiente la categoria a la que se desea registrar el cliente:" +
                             "\n0. No tiene" +
                             "\n1. Broce" +
                             "\n2. Plata" +
@@ -105,19 +110,19 @@ public class Aplicacion {
                     do {
                         switch (opcionCategoria) {
                             case 0:
-                                categoria = null;
+                                categoriaCliente = null;
                                 break;
 
                             case 1:
-                                categoria = Categoria.BRONCE;
+                                categoriaCliente = Categoria.BRONCE;
                                 break;
 
                             case 2:
-                                categoria = Categoria.PLATA;
+                                categoriaCliente = Categoria.PLATA;
                                 break;
 
                             case 3:
-                                categoria = Categoria.ORO;
+                                categoriaCliente = Categoria.ORO;
                                 break;
 
                             default:
@@ -125,7 +130,13 @@ public class Aplicacion {
                         }
                     } while(0 > opcionCategoria || opcionCategoria > 4);
 
-                    Cliente nuevoCliente = new Cliente(documentoCliente, nombre, correo, telefono, codigoAfiliacion, categoria);
+                    Cliente nuevoCliente = new Cliente(documentoCliente, nombreCliente, correoCliente, telefonoCliente, codigoAfiliacionCliente, categoriaCliente);
+                    boolean clienteRegistrado = empresa.registrarCliente(nuevoCliente);
+                    if (clienteRegistrado){
+                        System.out.println("El cliente se registro correctamente");
+                    } else {
+                        System.out.println("El cliente no pudo registrarse en el sistema");
+                    }
                     break;
                 case 3:
 
