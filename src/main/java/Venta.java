@@ -50,6 +50,11 @@ public class Venta {
         this.sucursal = sucursal;
     }
 
+    public void registrarDetalleVenta (DetalleVenta nuevoDetalleVenta){
+        listaDetalles.add(nuevoDetalleVenta);
+    }
+
+
     @Override
     public String toString() {
         return "\nVenta = " +

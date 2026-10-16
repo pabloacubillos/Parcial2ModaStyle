@@ -2,10 +2,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Prenda {
-    protected String codigo;
-    protected String marca;
-    protected String nombre;
-    protected double precio;
+    private String codigo;
+    private String marca;
+    private String nombre;
+    private double precio;
+
+    private List<Inventario> listaInventarios;
 
 
 
@@ -15,7 +17,7 @@ public abstract class Prenda {
         this.nombre = nombre;
         this.precio = precio;
 
-
+        listaInventarios = new ArrayList<>();
 
     }
 
@@ -30,6 +32,13 @@ public abstract class Prenda {
 
     public double getPrecio() { return precio; }
     public void setPrecio(double precio) { this.precio = precio; }
+
+    public List<Inventario> getListaInventarios() {
+        return listaInventarios;
+    }
+    public void setListaInventarios(List<Inventario> listaInventarios) {
+        this.listaInventarios = listaInventarios;
+    }
 
 
 

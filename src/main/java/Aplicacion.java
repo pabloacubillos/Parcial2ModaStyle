@@ -259,6 +259,7 @@ public class Aplicacion {
                     sucursalElegida.registrarVendedor(nuevoVendedor, codigoSucursalVendedor, empresa);
                     break;
 
+
                 case 4: {
                     System.out.println("===== REGISTRAR EXISTENCIAS =====");
 
@@ -278,10 +279,68 @@ public class Aplicacion {
                         System.out.println("No existe una prenda con ese codigo.");
                         break;
                     }
+
+                    System.out.print("Ingrese el codigo de la sucursal (S01 o S02): ");
+                    String codigoSucursalExistencias = sc.nextLine();
+
+                    Sucursal sucursalExistencias = empresa.obtenerSucursal(codigoSucursalExistencias);
+
+                    if (sucursalExistencias == null) {
+                        System.out.println("No existe una sucursal con ese codigo.");
+                        break;
+                    }
+
+                    System.out.println("Tallas disponibles:");
+                    for (TallaPrenda tallaRecorrida : TallaPrenda.values()) {
+                        System.out.println(tallaRecorrida);
+                    }
+
+                    System.out.print("Ingrese la talla: ");
+                    String textoTalla = sc.nextLine().toUpperCase();
+
+                    TallaPrenda tallaSeleccionada;
+
+                    try {
+                        tallaSeleccionada = TallaPrenda.valueOf(textoTalla);
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("La talla ingresada no es valida.");
+                        break;
+                    }
+
+                    System.out.print("Ingrese el color: ");
+                    String colorExistencias = sc.nextLine();
+
+                    System.out.print("Ingrese la cantidad disponible: ");
+                    int cantidadExistencias;
+
+                    try {
+                        cantidadExistencias = Integer.parseInt(sc.nextLine());
+
+                        if (cantidadExistencias <= 0) {
+                            System.out.println("La cantidad debe ser mayor que cero.");
+                            break;
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Debe ingresar una cantidad numerica.");
+                        break;
+                    }
+
+                    Inventario nuevoInventario = new Inventario(
+                            prendaSeleccionada,
+                            sucursalExistencias,
+                            tallaSeleccionada,
+                            colorExistencias,
+                            cantidadExistencias
+                    );
+
+                    sucursalExistencias.agregarInventario(nuevoInventario);
+
+                    System.out.println("Existencias registradas correctamente.");
                     break;
                 }
 
-                case 5:
+
+                case 5: {
                     //Registrar venta
                     String codigoSucursalVenta = "";
                     int sucursalElegidaVenta;
@@ -324,11 +383,6 @@ public class Aplicacion {
                     String documentoComprador = sc.nextLine();
 
                     if (!empresa.verificarCliente(documentoComprador)) {
-
-                    }
-                    System.out.println("Ingresa el documento del cliente");
-                    String documentoClienteVenta = sc.nextLine();
-                    if (!empresa.verificarCliente(documentoClienteVenta)) {
                         System.out.println("El cliente no esta registrado. Para realizar la venta, primero registre al cliente");
                         break;
                     }
@@ -347,7 +401,12 @@ public class Aplicacion {
 
                     LocalDate fechaVenta = LocalDate.now();
 
+                    System.out.println("");
+
+                    DetalleVenta detalleVenta = new DetalleVenta()
+
                     Venta ventaActual = new Venta(codigoVenta, fechaVenta, comprador, vendedorVenta, sucursalVenta);
+                    ventaActual.registrarDetalleVenta();
 
                     comprador.registrarVenta(ventaActual);
                     vendedorVenta.registrarVenta(ventaActual);
@@ -355,7 +414,7 @@ public class Aplicacion {
 
 
                     break;
-
+                }
                 case 6:
                     // Consultar total de una venta
                     System.out.println("\n===== CONSULTAR TOTAL DE UNA VENTA =====");
@@ -365,7 +424,7 @@ public class Aplicacion {
 
                     do {
                         System.out.println("Ingrese el el numero de la sucursal a la cual quiere consultar " +
-                                "la venta.");
+                                    "la venta.");
                         System.out.println("1. Sucursal codigo S01");
                         System.out.println("2. Sucursal codigo S02");
                         System.out.print("Seleccione una opción: ");
@@ -413,21 +472,72 @@ public class Aplicacion {
                     }
                     break;
 
-                case 7:
-                    // Declaración de la variable que faltaba
-                    Sucursal sucursalSeleccionada = null;
 
-                    // (Aquí deberías pedir el código de la sucursal y asignarla.
-                    // Por ahora se deja null para que compile)
-                    if (sucursalSeleccionada != null) {
-                        sucursalSeleccionada.mostrarPrendasDisponibles();
+                case 7: {
+                    System.out.println("===== CONSULTAR PRENDAS DISPONIBLES =====");
+
+                    System.out.println("1. Sucursal Centro (S01)");
+                    System.out.println("2. Sucursal Norte (S02)");
+                    System.out.print("Seleccione una sucursal: ");
+
+                    String opcionSucursalConsulta = sc.nextLine();
+                    String codigoSucursalConsulta;
+
+                    if (opcionSucursalConsulta.equals("1")) {
+                        codigoSucursalConsulta = "S01";
+                    } else if (opcionSucursalConsulta.equals("2")) {
+                        codigoSucursalConsulta = "S02";
+                    } else {
+                        System.out.println("Opcion de sucursal no valida.");
+                        break;
+                    }
+
+                    Sucursal sucursalConsulta =
+                            empresa.obtenerSucursal(codigoSucursalConsulta);
+
+                    if (sucursalConsulta != null) {
+                        sucursalConsulta.mostrarPrendasDisponibles();
+                    } else {
+                        System.out.println("No existe una sucursal con ese codigo.");
+                    }
+
+                    break;
+                }
+
+
+                case 8: {
+                    //cconsultar prendas agotadas
+                    System.out.println("\n===== CONSULTAR PRENDAS AGOTADAS =====");
+                    System.out.println("1. Sucursal Centro (S01)");
+                    System.out.println("2. Sucursal Norte (S02)");
+                    System.out.print("Seleccione una sucursal: ");
+
+                    String opcionSucursalConsulta = sc.nextLine();
+                    String codigoSucursalConsulta;
+
+                    if (opcionSucursalConsulta.equals("1")) {
+                        codigoSucursalConsulta = "S01";
+                    } else if (opcionSucursalConsulta.equals("2")) {
+                        codigoSucursalConsulta = "S02";
+                    } else {
+                        System.out.println("Opcion de sucursal no valida.");
+                        break;
+                    }
+                    Sucursal sucursalConsulta =
+                            empresa.obtenerSucursal(codigoSucursalConsulta);
+
+                    if (sucursalConsulta != null) {
+                        for (Inventario i : sucursalConsulta.getListaInventarios()){
+                            if(i.getCantidadDisponible() == 0){
+                                String informacionPrenda = i.toString();
+                                System.out.println(informacionPrenda);
+                            }
+                        }
                     } else {
                         System.out.println("No existe una sucursal con ese codigo.");
                     }
                     break;
-
-                case 8:
-                    break;
+                }
                 case 9:
                     System.out.println("\n===== CONSULTAR VENTAS DE UN VENDEDOR POR SUCURSAL =====");
                     int opciones;
@@ -498,8 +608,71 @@ public class Aplicacion {
                     }
 
                     break;
-                case 10:
+
+                case 10: {
+                    System.out.println("===== CONSULTAR COMPRAS DE UN CLIENTE =====");
+
+                    System.out.print("Ingrese el documento del cliente: ");
+                    String documentoConsulta = sc.nextLine();
+
+                    Cliente clienteSeleccionado = null;
+
+                    for (Cliente clienteRecorrido : empresa.getListaClientes()) {
+                        if (clienteRecorrido.getDocumento().equalsIgnoreCase(documentoConsulta)) {
+                            clienteSeleccionado = clienteRecorrido;
+                            break;
+                        }
+                    }
+
+                    if (clienteSeleccionado == null) {
+                        System.out.println("No existe un cliente con ese documento.");
+                        break;
+                    }
+
+                    if (clienteSeleccionado.getListaComprasCliente().isEmpty()) {
+                        System.out.println("Este cliente no tiene compras registradas.");
+                    } else {
+                        System.out.println("Compras del cliente:");
+
+                        for (Venta ventaRecorrida : clienteSeleccionado.getListaComprasCliente()) {
+                            System.out.println(ventaRecorrida);
+                        }
+                    }
+
                     break;
+                }
+                case 11: {
+                    //Calcular Ingresos sucursal
+
+                    System.out.println("===== CALCULAR INGRESOS DE UNA SUCURSAL =====");
+                    System.out.println("1. Sucursal Centro (S01)");
+                    System.out.println("2. Sucursal Norte (S02)");
+                    System.out.print("Seleccione una sucursal: ");
+
+                    String opcionSucursalConsulta = sc.nextLine();
+                    String codigoSucursalConsulta;
+
+                    if (opcionSucursalConsulta.equals("1")) {
+                        codigoSucursalConsulta = "S01";
+                    } else if (opcionSucursalConsulta.equals("2")) {
+                        codigoSucursalConsulta = "S02";
+                    } else {
+                        System.out.println("Opcion de sucursal no valida.");
+                        break;
+                    }
+                    Sucursal sucursalConsulta = empresa.obtenerSucursal(codigoSucursalConsulta);
+
+                    double ingresoTotal = 0;
+                    if (sucursalConsulta != null) {
+                        for (Inventario i : sucursalConsulta.getListaInventarios()){
+                            ingresoTotal += i.getPrenda().getPrecio();
+                        }
+                        System.out.println("El ingreso total de la sucursal es: $" + ingresoTotal);
+                    } else {
+                        System.out.println("No existe una sucursal con ese codigo.");
+                    }
+                    break;
+                }
                 case 12:
                     System.out.println("\n===== REPORTE: PRENDA MÁS VENDIDA =====");
 

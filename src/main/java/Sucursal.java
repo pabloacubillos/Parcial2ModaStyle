@@ -149,6 +149,21 @@ public class Sucursal {
             System.out.println("Esta sucursal no tiene prendas disponibles.");
         }
     }
+    public Prenda obtenerPrenda(String codigoPrenda){
+        Prenda prendaRequerida = null;
+        for (Inventario inventario : listaInventarios) {
+            if(inventario.getPrenda().getCodigo().equalsIgnoreCase(codigoPrenda)){
+                if (inventario.getCantidadDisponible() >= 0) {
+                    prendaRequerida = inventario.getPrenda();
+                } else {
+                    System.out.println("Esta prenda esta agotada, no hay");
+                }
+            } else {
+                System.out.println("La prenda requerida no existe");
+            }
+        }
+        return prendaRequerida;
+    }
 //metodo agregar inventario
     public void agregarInventario(Inventario inventario) {
         listaInventarios.add(inventario);
@@ -174,6 +189,8 @@ public class Sucursal {
         }
         return registroExitoso;
     }
+
+
 }
 
 
