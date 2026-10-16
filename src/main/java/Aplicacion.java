@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Aplicacion {
     public static void main (String[] args){
+        Empresa empresa = new Empresa("ModaStyle", "901234567-8","Armenia, Quindío" );
 
 
         //Menú interactivo
@@ -44,6 +45,36 @@ public class Aplicacion {
                 case 1:
                     //Registrar Prendas
                     System.out.println("=====Registrar prenda=====");
+
+                    System.out.print("Ingrese el codigo de la prenda: ");
+                    String codigo = sc.nextLine();
+
+                    if (empresa.verificarCodigoPrenda(codigo)) {
+                        System.out.println("Error: ese codigo ya existe.");
+                        break;
+                    }
+
+                    System.out.print("Ingrese la marca: ");
+                    String marca = sc.nextLine();
+
+                    System.out.print("Ingrese el nombre: ");
+                    String nombre = sc.nextLine();
+
+                    System.out.print("Ingrese el precio: ");
+                    double precio = sc.nextDouble();
+                    sc.nextLine();
+
+                    System.out.println("Seleccione el tipo de prenda:");
+                    System.out.println("1. Camiseta");
+                    System.out.println("2. Pantalon");
+                    System.out.println("3. Vestido");
+                    System.out.println("4. Chaqueta");
+                    System.out.println("5. Calzado");
+
+                    System.out.print("Opcion: ");
+                    int tipo = sc.nextInt();
+                    sc.nextLine();
+
 
                     break;
                 case 2:
