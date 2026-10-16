@@ -246,8 +246,11 @@ public class Aplicacion {
 
                 case 5:
                     //Registrar venta
+                    System.out.println("Ingrese el codigo de la sucursal donde se realiza la venta:");
+                    String codigoSucursalVenta = sc.nextLine();
 
-                    System.out.println("Ingresa el documento del cliente");
+
+                    System.out.println("Ingresa el documento del cliente que realiza la compra:");
                     String documentoComprador = sc.nextLine();
 
                     if (!empresa.verificarCliente(documentoComprador)) {
@@ -283,6 +286,7 @@ public class Aplicacion {
                 case 7:
                     break;
                 case 8:
+
                     break;
                 case 9:
                     break;
