@@ -3,10 +3,16 @@ import java.util.List;
 
 public class Empresa {
     private String nombre;
+    private String nit;
+    private String direccionPrincipal;
+
     private List<Sucursal> listaSucursales;
 
-    public Empresa(String nombre) {
+    public Empresa(String nombre, String nit, String direccionPrincipal) {
         this.nombre = nombre;
+        this.nit = nit;
+        this.direccionPrincipal = direccionPrincipal;
+
         listaSucursales = new ArrayList<>();
     }
 
@@ -22,6 +28,20 @@ public class Empresa {
     }
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getNit() {
+        return nit;
+    }
+    public void setNit(String nit) {
+        this.nit = nit;
+    }
+
+    public String getDireccionPrincipal() {
+        return direccionPrincipal;
+    }
+    public void setDireccionPrincipal(String direccionPrincipal) {
+        this.direccionPrincipal = direccionPrincipal;
     }
 
     public List<Sucursal> getListaSucursales() {

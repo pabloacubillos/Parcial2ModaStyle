@@ -10,6 +10,7 @@ public class Sucursal {
     private List<Inventario> listaInventarios;
     private List<Vendedor> listaVendedores;
     private List<Venta> listaVentas;
+    private List<Cliente> listaClientes;
 
     public Sucursal(String codigo, String nombre, String direccion, String ciudad, Empresa empresa) {
         this.codigo = codigo;
@@ -21,6 +22,7 @@ public class Sucursal {
         listaInventarios = new ArrayList<>();
         listaVendedores = new ArrayList<>();
         listaVentas = new ArrayList<>();
+        listaClientes = new ArrayList<>();
     }
 
     public String getCodigo() {return codigo;}
@@ -63,6 +65,13 @@ public class Sucursal {
         this.listaVentas = listaVentas;
     }
 
+    public List<Cliente> getListaClientes() {
+        return listaClientes;
+    }
+    public void setListaClientes(List<Cliente> listaClientes) {
+        this.listaClientes = listaClientes;
+    }
+
     @Override
     public String toString() {
         return "\nSucursal = " +
@@ -71,4 +80,6 @@ public class Sucursal {
                 ", direccion: " + direccion +
                 ", ciudad: " + ciudad + ". ";
     }
+
+    // Metodo Agregar vendedor
 }

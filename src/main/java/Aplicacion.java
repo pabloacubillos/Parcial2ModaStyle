@@ -1,3 +1,5 @@
+import java.sql.SQLOutput;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Aplicacion {
@@ -95,6 +97,48 @@ public class Aplicacion {
                     Cliente nuevoCliente = new Cliente(documentoCliente, nombre, correo, telefono, codigoAfiliacion, categoria);
                     break;
                 case 3:
+
+
+                    // Registrar un vendedor
+                    System.out.println(" === INGRESAR UN VENDEDOR ===");
+                    System.out.println("Ingresa el numero de documento del vendedor");
+                    String documentoVendedor = sc.nextLine();
+
+                    System.out.println("Ingresa el nombre del vendedor");
+                    String nombreVendedor = sc.nextLine();
+
+                    System.out.println("Ingresa el correo electronico del vendedor");
+                    String correoVendedor = sc.nextLine();
+
+                    System.out.println("Ingresa el numero de telefono del vendedor");
+                    String telefonoVendedor = sc.nextLine();
+
+                    System.out.println("Ingresa el codigo del vendedor");
+                    String codigoVendedor = sc.nextLine();
+
+                    System.out.println("A continuacion, ingrese la fecha de contratación " +
+                            "del vendedor");
+
+                    System.out.println("-Año: ");
+                    int anio = sc.nextInt();
+
+                    System.out.println("-Mes: ");
+                    int mes = sc.nextInt();
+
+                    System.out.println("-Dia: ");
+                    int dia = sc.nextInt();
+                    LocalDate fechaContratacin = LocalDate.of(anio, mes, dia);
+                    sc.nextLine();
+
+                    System.out.println("Ingrese el salario del vendedor: ");
+                    double salario = sc.nextDouble();
+
+
+
+
+
+
+
                     break;
                 case 4:
                     break;
