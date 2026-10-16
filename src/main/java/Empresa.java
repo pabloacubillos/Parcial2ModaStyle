@@ -119,6 +119,32 @@ public class Empresa {
         }
     }
 
+    //Buscar Clientes
+    public Cliente buscarCliente (String documento){
+        Cliente clienteBuscado = null;
+        for (Cliente cliente : listaClientes){
+            if (cliente.getDocumento().equalsIgnoreCase(documento)){
+                clienteBuscado = cliente;
+            }
+        }
+        if (clienteBuscado.getDocumento().equalsIgnoreCase(documento)){
+            return clienteBuscado;
+        } else {
+            System.out.println("ERROR. CLIENTE NO ENCONTRADO");
+            System.exit(0);
+            return clienteBuscado;
+        }
+    }
+
+    //Actualizar cliente
+    public void actualizarCliente (Cliente clienteActualizado){
+        for(Cliente cliente : listaClientes){
+            if(cliente.getDocumento().equalsIgnoreCase(clienteActualizado.getDocumento())){
+                cliente = clienteActualizado;
+            }
+        }
+    }
+
     //Agregar prenda a la lista
     public void agregarPrenda(Prenda prenda) {
         listaPrendas.add(prenda);
